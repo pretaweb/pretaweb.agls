@@ -55,6 +55,7 @@ setup(name='pretaweb.agls',
       include_package_data=True,
       zip_safe=False,
       install_requires=['setuptools',
+                        'plone.app.z3cform',
                         # -*- Extra requirements: -*-
                         ],
       tests_require=tests_require,

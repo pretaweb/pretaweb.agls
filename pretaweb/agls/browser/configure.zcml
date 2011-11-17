@@ -3,5 +3,17 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="pretaweb.agls">
 
+  <browser:page
+      for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
+      name="agls-controlpanel"
+      class=".controlpanel.AGLSControlPanelView"
+      layer=".interfaces.IPackageLayer"
+      permission="cmf.ManagePortal"
+      />
+
+  <browser:resource
+      name="agls_icon.png"
+      file="resources/img/agls_icon.png"
+      />
 
 </configure>
