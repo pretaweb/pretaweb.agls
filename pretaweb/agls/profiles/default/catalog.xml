@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<object name="portal_catalog" meta_type="Plone Catalog Tool">
+ <index name="agls_subject" meta_type="KeywordIndex">
+  <indexed_attr value="agls_subject"/>
+ </index>
+ <index name="agls_type" meta_type="KeywordIndex">
+  <indexed_attr value="agls_type"/>
+ </index>
+ <column value="agls_subject"/>
+ <column value="agls_type"/>
+</object>
