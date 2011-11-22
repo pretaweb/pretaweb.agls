@@ -236,7 +236,9 @@ class AGLSExtender(object):
             schemata="agls",
             widget=atapi.BooleanWidget(
                 label=_(u"Override AGLS Format"),
-                description=_(u"By default 'html' string is used.")
+                description=_(u"By default object's content-type will be used. "
+                              "Either html or file mime-type for File/Image "
+                              "based content types.")
             ),
             required=False,
             default=False
@@ -248,8 +250,7 @@ class AGLSExtender(object):
                 description=_(u"Enter here custom format to use in AGLS "
                               "tag.")
             ),
-            required=False,
-            default='html'
+            required=False
         ),
         
     ]
