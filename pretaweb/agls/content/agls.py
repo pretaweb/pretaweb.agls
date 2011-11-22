@@ -8,6 +8,7 @@ from archetypes.schemaextender.field import ExtensionField
 from archetypes.schemaextender.interfaces import IBrowserLayerAwareExtender, \
     ISchemaExtender
 
+from pretaweb.agls.form.widget import MultipleIndexKeywordWidget
 from pretaweb.agls.browser.interfaces import IPackageLayer
 from pretaweb.agls import messageFactory as _
 
@@ -140,17 +141,42 @@ class AGLSExtender(object):
             schemata="agls",
             accessor='agls_subject',
             multivalued=1,
-            widget=atapi.KeywordWidget(
+            widget=MultipleIndexKeywordWidget(
                 label=_(u"AGLS Subject"),
-                description=_(u"Enter here custom keywords to use in AGLS tag.")
+                description=_(u"Enter here custom keywords to use in AGLS "
+                              "tag."),
+                indexes=('Subject', 'agls_subject')
             ),
             required=False
         ),
         
         # AGLS Type
+        ExtensionBooleanField("agls_type_override",
+            schemata="agls",
+            widget=atapi.BooleanWidget(
+                label=_(u"Override AGLS Type"),
+                description=_(u"By default object's AGLS Type, from "
+                              "Categorization tab, field is used in AGLS tag.")
+            ),
+            required=False,
+            default=False
+        ),
         ExtensionLinesField("agls_type",
             schemata="agls",
             accessor='agls_type',
+            multivalued=1,
+            widget=MultipleIndexKeywordWidget(
+                label=_(u"AGLS Type"),
+                description=_(u"Enter here list of keywords to use in AGLS "
+                              "Type tag. If list is empty Type tag won't be "
+                              "inserted into page."),
+                indexes=('AGLSType', 'agls_type')
+            ),
+            required=False
+        ),
+        ExtensionLinesField("AGLSType",
+            schemata="categorization",
+            accessor='AGLSType',
             multivalued=1,
             widget=atapi.KeywordWidget(
                 label=_(u"AGLS Type"),
