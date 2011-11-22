@@ -11,6 +11,15 @@
       permission="cmf.ManagePortal"
       />
 
+  <!-- Override Dublin Core viewlet to make it AGLS complaint -->
+  <browser:viewlet
+      name="plone.htmlhead.dublincore"
+      manager="plone.app.layout.viewlets.interfaces.IHtmlHead"
+      class=".viewlets.AGLSViewlet"
+      layer=".interfaces.IPackageLayer"
+      permission="zope2.View"
+      />
+
   <browser:resource
       name="agls_icon.png"
       file="resources/img/agls_icon.png"
