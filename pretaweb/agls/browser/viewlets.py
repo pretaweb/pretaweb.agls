@@ -125,14 +125,14 @@ class AGLSViewlet(DublinCoreViewlet):
         # AGLS Identifier
         if shasattr(context, 'agls_id_override') and \
            context.agls_id_override:
-            value = context.agls_id
+            value = u'urn:uuid:' + safe_unicode(context.agls_id)
         elif shasattr(context, 'UID'):
-            value = context.UID()
+            value = u'urn:uuid:' + safe_unicode(context.UID())
         else:
-            value = context.getId()
+            value = safe_unicode(context.absolute_url())
         agls_tags.append({
             'name': u'DCTERMS.identifier',
-            'content': u'urn:uuid:' + safe_unicode(value),
+            'content': value,
             'scheme': AGLS_SCHEME['DCTERMS.identifier']
         })
         
