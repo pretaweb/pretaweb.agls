@@ -129,7 +129,7 @@ class AGLSViewlet(DublinCoreViewlet):
         elif shasattr(context, 'UID'):
             value = context.UID()
         else:
-            value = contet.getId()
+            value = context.getId()
         agls_tags.append({
             'name': u'DCTERMS.identifier',
             'content': u'urn:uuid:' + safe_unicode(value),
