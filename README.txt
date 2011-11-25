@@ -1,17 +1,27 @@
-.. contents::
+Introduction
+============
 
-.. Note!
-   -----
-   Update the following URLs to point to your:
+This package introduces AGLS Metadata into Plone pages.
 
-   - code repository
-   - bug tracker
-   - questions/comments feedback mail
-   (do not set a real mail, to avoid spams)
 
-   Or remove it if not used.
+Compatibility
+-------------
 
-- Code repository: http://svn.somewhere.com/...
-- Questions and comments to somemailing_list
-- Report bugs at http://bug.somewhere.com/..
+Tested on plone 4.
 
+Works for the next Plone content type frameworks:
+
+* Archetypes
+
+* Dexterity
+
+
+
+Useful Links
+------------
+
+* AGLS Standard:
+    http://www.agls.gov.au/
+
+* AGLS Usage Guide:
+    http://www.agls.gov.au/pdf/AGLS%20Metadata%20Standard%20Part%202%20Usage%20Guide.PDF
