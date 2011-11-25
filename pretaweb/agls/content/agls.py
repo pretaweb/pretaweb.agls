@@ -161,30 +161,24 @@ class AGLSExtender(object):
             required=False,
             default=False
         ),
-        ExtensionLinesField("agls_type",
+        ExtensionStringField("agls_type",
             schemata="agls",
-            accessor='agls_type',
-            multivalued=1,
-            widget=MultipleIndexKeywordWidget(
+            widget=atapi.StringWidget(
                 label=_(u"AGLS Type"),
-                description=_(u"Enter here list of keywords to use in AGLS "
-                              "Type tag. If list is empty Type tag won't be "
-                              "inserted into page."),
-                indexes=('AGLSType', 'agls_type')
+                description=_(u"Enter here custom Type to use in AGLS Type "
+                              "Tag."),
             ),
-            required=False
+            required=False,
+            default=''
         ),
-        ExtensionLinesField("AGLSType",
+        ExtensionStringField("AGLSType",
             schemata="categorization",
-            accessor='AGLSType',
-            multivalued=1,
-            widget=atapi.KeywordWidget(
+            widget=atapi.StringWidget(
                 label=_(u"AGLS Type"),
-                description=_(u"Enter here list of keywords to use in AGLS "
-                              "Type tag. If list is empty Type tag won't be "
-                              "inserted into page.")
+                description=_(u"Enter here text line to use in AGLS Type tag.")
             ),
-            required=False
+            required=False,
+            default=''
         ),
         
         # AGLS Identifier

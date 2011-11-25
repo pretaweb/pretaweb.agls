@@ -113,9 +113,9 @@ class AGLSViewlet(DublinCoreViewlet):
         value = ''
         if shasattr(context, 'agls_type_override') and \
            context.agls_type_override:
-            value = ', '.join(context.agls_type)
+            value = context.agls_type
         elif shasattr(context, 'AGLSType'):
-            value = ', '.join(context.AGLSType)
+            value = context.AGLSType
         agls_tags.append({
             'name': u'DCTERMS.type',
             'content': safe_unicode(value),
