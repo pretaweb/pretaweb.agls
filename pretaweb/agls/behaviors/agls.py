@@ -25,7 +25,6 @@ AGLS_FIELDS = (
     'agls_desc_override', 'agls_desc',
     'agls_date_override', 'agls_date',
     'agls_author_override', 'agls_author',
-    'agls_subject_override', 'agls_subject',
     'agls_type_override', 'agls_type',
     'agls_id_override', 'agls_id',
     'agls_publisher_override', 'agls_publisher',
@@ -107,27 +106,6 @@ class IAGLS(form.Schema):
         default=u'',
         missing_value=u''
     )
-    
-    # AGLS Subject
-    agls_subject_override = schema.Bool(
-        title=_(u"Override AGLS Subject"),
-        description=_(u"By default object's tags field is used in AGLS "
-                      "tag."),
-        required=False,
-        default=False,
-        missing_value=False
-    )
-    
-    # TODO: make it as in MultipleKeyword Widgets Archetypes extender
-    agls_subject = schema.Tuple(
-        title=_(u"AGLS Subject"),
-        description=_(u"Enter here custom keywords to use in AGLS tag."),
-        value_type=schema.TextLine(),
-        required=False,
-        missing_value=()
-    )
-    form.widget(agls_subject=TextLinesFieldWidget)
-    
 
     # AGLS Type
     agls_type_override = schema.Bool(
@@ -247,8 +225,6 @@ class AGLS(MetadataBase):
     agls_date = DCFieldProperty(IAGLS['agls_date'])
     agls_author_override = DCFieldProperty(IAGLS['agls_author_override'])
     agls_author = DCFieldProperty(IAGLS['agls_author'])
-    agls_subject_override = DCFieldProperty(IAGLS['agls_subject_override'])
-    agls_subject = DCFieldProperty(IAGLS['agls_subject'])
     agls_type_override = DCFieldProperty(IAGLS['agls_type_override'])
     agls_type = DCFieldProperty(IAGLS['agls_type'])
     agls_id_override = DCFieldProperty(IAGLS['agls_id_override'])

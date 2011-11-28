@@ -8,7 +8,6 @@ from archetypes.schemaextender.field import ExtensionField
 from archetypes.schemaextender.interfaces import IBrowserLayerAwareExtender, \
     ISchemaExtender
 
-from pretaweb.agls.form.widget import MultipleIndexKeywordWidget
 from pretaweb.agls.browser.interfaces import IPackageLayer
 from pretaweb.agls import messageFactory as _
 
@@ -124,30 +123,6 @@ class AGLSExtender(object):
             ),
             required=False,
             default=''
-        ),
-        
-        # AGLS Subject
-        ExtensionBooleanField("agls_subject_override",
-            schemata="agls",
-            widget=atapi.BooleanWidget(
-                label=_(u"Override AGLS Subject"),
-                description=_(u"By default object's keywords field is used "
-                              "in AGLS tag.")
-            ),
-            required=False,
-            default=False
-        ),
-        ExtensionLinesField("agls_subject",
-            schemata="agls",
-            accessor='agls_subject',
-            multivalued=1,
-            widget=MultipleIndexKeywordWidget(
-                label=_(u"AGLS Subject"),
-                description=_(u"Enter here custom keywords to use in AGLS "
-                              "tag."),
-                indexes=('Subject', 'agls_subject')
-            ),
-            required=False
         ),
         
         # AGLS Type
