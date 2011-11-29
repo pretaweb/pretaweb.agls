@@ -56,7 +56,7 @@ setup(name='pretaweb.agls',
       zip_safe=False,
       install_requires=['setuptools',
                         'plone.app.z3cform',
-                        'collective.gtags',
+                        'collective.z3cform.keywordwidget',
                         # -*- Extra requirements: -*-
                         ],
       tests_require=tests_require,

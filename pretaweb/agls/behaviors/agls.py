@@ -6,13 +6,18 @@ from zope.interface import alsoProvides
 from z3c.form.interfaces import IEditForm, IAddForm
 from plone.directives import form
 from plone.autoform.interfaces import IFormFieldProvider
-from plone.app.dexterity.behaviors.metadata import DCFieldProperty, MetadataBase
+from plone.app.dexterity.behaviors.metadata import DCFieldProperty, \
+    ICategorization, Categorization
+
+from collective.z3cform.keywordwidget.field import Keywords
+from collective.z3cform.keywordwidget.widget import KeywordFieldWidget
 
 try:
     from z3c.form.browser.textlines import TextLinesFieldWidget
 except ImportError:
     from plone.z3cform.textlines.textlines import TextLinesFieldWidget
 
+from pretaweb.agls.form.widget import Z3CFormKeywordFieldWidget
 from pretaweb.agls import messageFactory as _
 
 
@@ -32,6 +37,42 @@ AGLS_FIELDS = (
 )
 
 class IAGLS(form.Schema):
+    """Here we define new AGLS fieldset as well as extend and modify
+    existing Categorization fielset:
+    
+      * add AGLSType field
+      * set KeywordWidget to subjects field
+    """
+    
+    # Categorization fieldset
+    form.fieldset(
+        'categorization',
+        label=_(u'Categorization'),
+        fields=['subjects', 'language', 'AGLSType'],
+    )
+    
+    subjects = Keywords(
+        title=_(u'label_categories', default=u'Categories'),
+        description=_(u'help_categories', default=u"Also known as keywords, "
+                      "tags or labels, these help you categorize your "
+                      "content."),
+        required=False,
+        value_type=schema.TextLine(),
+        missing_value=()
+    )
+    form.widget(subjects=Z3CFormKeywordFieldWidget)
+    
+    language = ICategorization['language']
+    
+    # Main AGLS Type
+    AGLSType = schema.TextLine(
+        title=_(u"AGLS Type"),
+        description=_(u"Enter here text line to use in AGLS Type tag."),
+        required=False,
+        default=u'',
+        missing_value=u''
+    )
+    
     
     # AGLS fieldset
     form.fieldset(
@@ -179,43 +220,16 @@ class IAGLS(form.Schema):
         default=u'',
         missing_value=u''
     )
-
-
-    # Categorization fieldset
-    form.fieldset(
-        'categorization',
-        label=_(u'Categorization'),
-        fields=['AGLSType'],
-        )
     
-    # Main AGLS Type
-    AGLSType = schema.TextLine(
-        title=_(u"AGLS Type"),
-        description=_(u"Enter here text line to use in AGLS Type tag."),
-        required=False,
-        default=u'',
-        missing_value=u''
-    )
-    
-    # TODO: assign KeywordsWidget-like widget to subjects field
-    # subjects = schema.Tuple(
-    #     title = _(u'label_categories', default=u'Categories'),
-    #     description = _(u'help_categories', default=u'Also known as keywords, tags or labels, these help you categorize your content.'),
-    #     value_type = schema.TextLine(),
-    #     required = False,
-    #     missing_value = (),
-    #     )
-    # form.widget(subjects=TextLinesFieldWidget)
-
-    # display AGLS fields only on edit forms
-    form.omitted('AGLSType', *AGLS_FIELDS)
-    form.no_omit(IEditForm, 'AGLSType', *AGLS_FIELDS)
-    form.no_omit(IAddForm, 'AGLSType', *AGLS_FIELDS)
+    # display fields only on edit forms
+    form.omitted('AGLSType', 'subjects', 'language', *AGLS_FIELDS)
+    form.no_omit(IEditForm, 'AGLSType', 'subjects', 'language', *AGLS_FIELDS)
+    form.no_omit(IAddForm, 'AGLSType', 'subjects', 'language', *AGLS_FIELDS)
 
 # Mark this interface as form field provider
 alsoProvides(IAGLS, IFormFieldProvider)
 
-class AGLS(MetadataBase):
+class AGLS(Categorization):
 
     agls_title_override = DCFieldProperty(IAGLS['agls_title_override'])
     agls_title = DCFieldProperty(IAGLS['agls_title'])

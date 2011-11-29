@@ -8,6 +8,7 @@
     i18n_domain="pretaweb.agls">
     
   <five:registerPackage package="." initialize=".initialize" />
+  <include package="collective.z3cform.keywordwidget" />
 
   <!-- Include the sub-packages that use their own configure.zcml files. -->
   <include package=".browser" />
