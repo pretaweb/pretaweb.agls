@@ -35,10 +35,10 @@ class IAGLS(form.Schema):
     
     # AGLS fieldset
     form.fieldset(
-        'agls',
-        label=_(u'AGLS'),
+        'agls_metadata',
+        label=_(u'Agls metadata'),
         fields=list(AGLS_FIELDS),
-        )
+    )
     
     # AGLS Title
     agls_title_override = schema.Bool(

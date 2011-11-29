@@ -42,7 +42,7 @@ class AGLSExtender(object):
     fields = [
         # AGLS Title
         ExtensionBooleanField("agls_title_override",
-            schemata="agls",
+            schemata="AGLS Metadata",
             widget=atapi.BooleanWidget(
                 label=_(u"Override AGLS Title"),
                 description=_(u"By default object's title field is used.")
@@ -51,7 +51,7 @@ class AGLSExtender(object):
             default=False
         ),
         ExtensionStringField("agls_title",
-            schemata="agls",
+            schemata="AGLS Metadata",
             widget=atapi.StringWidget(
                 label=_(u"AGLS Title"),
                 description=_(u"Enter here custom title to use in AGLS tag.")
@@ -62,7 +62,7 @@ class AGLSExtender(object):
         
         # AGLS Description
         ExtensionBooleanField("agls_desc_override",
-            schemata="agls",
+            schemata="AGLS Metadata",
             widget=atapi.BooleanWidget(
                 label=_(u"Override AGLS Description"),
                 description=_(u"By default object's description field is used.")
@@ -71,7 +71,7 @@ class AGLSExtender(object):
             default=False
         ),
         ExtensionTextField("agls_desc",
-            schemata="agls",
+            schemata="AGLS Metadata",
             default_content_type='text/plain',
             allowable_content_types=('text/plain',),
             widget=atapi.TextAreaWidget(
@@ -85,7 +85,7 @@ class AGLSExtender(object):
         
         # AGLS Date
         ExtensionBooleanField("agls_date_override",
-            schemata="agls",
+            schemata="AGLS Metadata",
             widget=atapi.BooleanWidget(
                 label=_(u"Override AGLS Date"),
                 description=_(u"By default object's creation date field is "
@@ -95,7 +95,7 @@ class AGLSExtender(object):
             default=False
         ),
         ExtensionDateTimeField("agls_date",
-            schemata="agls",
+            schemata="AGLS Metadata",
             widget=atapi.CalendarWidget(
                 label=_(u"AGLS Date"),
                 description=_(u"Enter here custom date to use in AGLS "
@@ -106,7 +106,7 @@ class AGLSExtender(object):
         
         # AGLS Author
         ExtensionBooleanField("agls_author_override",
-            schemata="agls",
+            schemata="AGLS Metadata",
             widget=atapi.BooleanWidget(
                 label=_(u"Override AGLS Author"),
                 description=_(u"By default object's creator field is used or "
@@ -116,7 +116,7 @@ class AGLSExtender(object):
             default=False
         ),
         ExtensionStringField("agls_author",
-            schemata="agls",
+            schemata="AGLS Metadata",
             widget=atapi.StringWidget(
                 label=_(u"AGLS Author"),
                 description=_(u"Enter here custom author to use in AGLS tag.")
@@ -127,7 +127,7 @@ class AGLSExtender(object):
         
         # AGLS Type
         ExtensionBooleanField("agls_type_override",
-            schemata="agls",
+            schemata="AGLS Metadata",
             widget=atapi.BooleanWidget(
                 label=_(u"Override AGLS Type"),
                 description=_(u"By default object's AGLS Type, from "
@@ -137,7 +137,7 @@ class AGLSExtender(object):
             default=False
         ),
         ExtensionStringField("agls_type",
-            schemata="agls",
+            schemata="AGLS Metadata",
             widget=atapi.StringWidget(
                 label=_(u"AGLS Type"),
                 description=_(u"Enter here custom Type to use in AGLS Type "
@@ -158,7 +158,7 @@ class AGLSExtender(object):
         
         # AGLS Identifier
         ExtensionBooleanField("agls_id_override",
-            schemata="agls",
+            schemata="AGLS Metadata",
             widget=atapi.BooleanWidget(
                 label=_(u"Override AGLS Identifier"),
                 description=_(u"By default object's UID attribute is used for "
@@ -168,7 +168,7 @@ class AGLSExtender(object):
             default=False
         ),
         ExtensionStringField("agls_id",
-            schemata="agls",
+            schemata="AGLS Metadata",
             widget=atapi.StringWidget(
                 label=_(u"AGLS Identifier"),
                 description=_(u"Enter here custom identifier to use in AGLS "
@@ -180,7 +180,7 @@ class AGLSExtender(object):
         
         # AGLS Publisher
         ExtensionBooleanField("agls_publisher_override",
-            schemata="agls",
+            schemata="AGLS Metadata",
             widget=atapi.BooleanWidget(
                 label=_(u"Override AGLS Publisher"),
                 description=_(u"By default object's creator field is used or "
@@ -190,7 +190,7 @@ class AGLSExtender(object):
             default=False
         ),
         ExtensionStringField("agls_publisher",
-            schemata="agls",
+            schemata="AGLS Metadata",
             widget=atapi.StringWidget(
                 label=_(u"AGLS Publisher"),
                 description=_(u"Enter here custom publisher to use in AGLS "
@@ -202,7 +202,7 @@ class AGLSExtender(object):
         
         # AGLS Format
         ExtensionBooleanField("agls_format_override",
-            schemata="agls",
+            schemata="AGLS Metadata",
             widget=atapi.BooleanWidget(
                 label=_(u"Override AGLS Format"),
                 description=_(u"By default object's content-type will be used. "
@@ -213,7 +213,7 @@ class AGLSExtender(object):
             default=False
         ),
         ExtensionStringField("agls_format",
-            schemata="agls",
+            schemata="AGLS Metadata",
             widget=atapi.StringWidget(
                 label=_(u"AGLS Format"),
                 description=_(u"Enter here custom format to use in AGLS "
