@@ -60,11 +60,7 @@ class AGLSViewlet(DublinCoreViewlet):
         })
         
         # AGLS Date
-        if shasattr(context, 'agls_date_override') and \
-           context.agls_date_override:
-            value = context.agls_date
-        else:
-            value = dc.get('DC.date.created', '')
+        value = dc.get('DC.date.created', '')
         # try to convert value to ISO8601 format
         if hasattr(value, 'ISO8601'):
             # zope DateTime
