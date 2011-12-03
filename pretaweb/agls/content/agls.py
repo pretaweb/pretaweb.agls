@@ -6,7 +6,7 @@ from Products.Archetypes import public as atapi
 
 from archetypes.schemaextender.field import ExtensionField
 from archetypes.schemaextender.interfaces import IBrowserLayerAwareExtender, \
-    ISchemaExtender
+    ISchemaExtender, ISchemaModifier
 
 from pretaweb.agls.browser.interfaces import IPackageLayer
 from pretaweb.agls import messageFactory as _
@@ -23,9 +23,6 @@ class ExtensionTextField(ExtensionField, atapi.TextField):
 
 class ExtensionLinesField(ExtensionField, atapi.LinesField):
     """Retrofitted lines field"""
-
-class ExtensionDateTimeField(ExtensionField, atapi.DateTimeField):
-    """Retrofitted datetime field"""
 
 
 # AGLS fields extender
@@ -81,27 +78,6 @@ class AGLSExtender(object):
             ),
             required=False,
             default=''
-        ),
-        
-        # AGLS Date
-        ExtensionBooleanField("agls_date_override",
-            schemata="AGLS Metadata",
-            widget=atapi.BooleanWidget(
-                label=_(u"Override AGLS Date"),
-                description=_(u"By default object's creation date field is "
-                              "used.")
-            ),
-            required=False,
-            default=False
-        ),
-        ExtensionDateTimeField("agls_date",
-            schemata="AGLS Metadata",
-            widget=atapi.CalendarWidget(
-                label=_(u"AGLS Date"),
-                description=_(u"Enter here custom date to use in AGLS "
-                              "tag.")
-            ),
-            required=False
         ),
         
         # AGLS Author
@@ -230,3 +206,32 @@ class AGLSExtender(object):
     def getFields(self):
         """Return list of new fields we contribute to content"""
         return self.fields
+
+class AGLSModifier(object):
+    """Here we update creation date field to display it under AGLS tab"""
+
+    adapts(IBaseContent)
+    implements(ISchemaModifier, IBrowserLayerAwareExtender)
+    
+    layer = IPackageLayer
+    
+    def __init__(self, context):
+        self.context = context
+        
+    def fiddle(self, schema):
+        if schema.get('creation_date', None) is None:
+            return
+        
+        # move to AGLS schemata
+        schema['creation_date'].schemata = 'AGLS Metadata'
+        
+        # update desctiption
+        schema['creation_date'].widget.description = _(u"Date this "
+            "object was created. Used for AGLS Date meta tag.")
+            
+        # unhide it
+        schema['creation_date'].widget.visible = {'edit': 'visible',
+            'view': 'invisible'}
+        
+        # move after AGLS description field
+        schema.moveField('creation_date', after='agls_desc')
