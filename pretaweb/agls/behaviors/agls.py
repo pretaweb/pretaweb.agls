@@ -28,7 +28,7 @@ from pretaweb.agls import messageFactory as _
 AGLS_FIELDS = (
     'agls_title_override', 'agls_title',
     'agls_desc_override', 'agls_desc',
-    'agls_date_override', 'agls_date',
+    'creation_date',
     'agls_author_override', 'agls_author',
     'agls_type_override', 'agls_type',
     'agls_id_override', 'agls_id',
@@ -116,17 +116,10 @@ class IAGLS(form.Schema):
     )
 
     # AGLS Date
-    agls_date_override = schema.Bool(
-        title=_(u"Override AGLS Date"),
-        description=_(u"By default object's creation date field is used."),
-        required=False,
-        default=False,
-        missing_value=False
-    )
-    
-    agls_date = schema.Datetime(
-        title=_(u"AGLS Date"),
-        description=_(u"Enter here custom date to use in AGLS tag."),
+    creation_date = schema.Datetime(
+        title=_(u"Creation Date"),
+        description=_(u"Date this object was created. Used for AGLS Date meta "
+                      "tag."),
         required=False
     )
     
@@ -235,8 +228,7 @@ class AGLS(Categorization):
     agls_title = DCFieldProperty(IAGLS['agls_title'])
     agls_desc_override = DCFieldProperty(IAGLS['agls_desc_override'])
     agls_desc = DCFieldProperty(IAGLS['agls_desc'])
-    agls_date_override = DCFieldProperty(IAGLS['agls_date_override'])
-    agls_date = DCFieldProperty(IAGLS['agls_date'])
+    creation_date = DCFieldProperty(IAGLS['creation_date'])
     agls_author_override = DCFieldProperty(IAGLS['agls_author_override'])
     agls_author = DCFieldProperty(IAGLS['agls_author'])
     agls_type_override = DCFieldProperty(IAGLS['agls_type_override'])
