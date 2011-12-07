@@ -233,5 +233,8 @@ class AGLSModifier(object):
         schema['creation_date'].widget.visible = {'edit': 'visible',
             'view': 'invisible'}
         
+        # set starting year
+        schema['creation_date'].widget.starting_year = 1990
+        
         # move after AGLS description field
         schema.moveField('creation_date', after='agls_desc')

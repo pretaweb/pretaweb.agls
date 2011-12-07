@@ -60,17 +60,17 @@ class AGLSViewlet(DublinCoreViewlet):
         })
         
         # AGLS Date
-        value = dc.get('DC.date.created', '')
-        # try to convert value to ISO8601 format
-        if hasattr(value, 'ISO8601'):
-            # zope DateTime
-            value = value.ISO8601()
-        elif hasattr(value, 'isoformat'):
-            # python datetime
-            value = value.isoformat()
+        value = ''
+        if shasattr(context, 'creation_date'):
+            value = context.creation_date
+            # try to convert value to ISO8601 format w/o time component
+            if hasattr(value, 'strftime'):
+                value = value.strftime('%Y-%m-%d')
+            else:
+                value = ''
         agls_tags.append({
             'name': u'DCTERMS.created',
-            'content': value or '',
+            'content': value,
             'scheme': AGLS_SCHEME['DCTERMS.created']
         })
         
