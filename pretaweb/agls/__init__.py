@@ -9,6 +9,7 @@ from zope.i18nmessageid import MessageFactory
 
 messageFactory = MessageFactory('pretaweb.agls')
 
+import patches
 
 def initialize(context):
     """Initializer called when used as a Zope 2 product."""
