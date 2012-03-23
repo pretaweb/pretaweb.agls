@@ -29,25 +29,17 @@ class AGLSViewlet(DublinCoreViewlet):
         
         context = aq_inner(self.context)
         agls_tags = []
-        
-        # AGLS Title
-        if shasattr(context, 'agls_title_override') and \
-           context.agls_title_override:
-            value = context.agls_title
-        else:
-            value = dc.get('DC.Title', '') or context.Title()
+
+        agls = context.unrestrictedTraverse("@@agls")
+        value = agls.Title() or dc.get('DC.Title', '') or context.Title()
         agls_tags.append({
             'name': u'DCTERMS.title',
-            'content': safe_unicode(value),
+            'content': safe_unicode(agls.Title()),
             'scheme': AGLS_SCHEME['DCTERMS.title']
         })
         
         # AGLS Description
-        if shasattr(context, 'agls_desc_override') and \
-           context.agls_desc_override:
-            value = context.agls_desc
-        else:
-            value = dc.get('DC.description', '')
+        value = agls.Description() or dc.get('DC.description', '')
         agls_tags.append({
             'name': u'DCTERMS.description',
             'content': safe_unicode(value),
@@ -60,45 +52,19 @@ class AGLSViewlet(DublinCoreViewlet):
         })
         
         # AGLS Date
-        value = ''
-        if shasattr(context, 'creation_date'):
-            value = context.creation_date
-            # try to convert value to ISO8601 format w/o time component
-            if hasattr(value, 'strftime'):
-                value = value.strftime('%Y-%m-%d')
-            else:
-                value = ''
         agls_tags.append({
             'name': u'DCTERMS.created',
-            'content': value,
+            'content': agls.Created(),
             'scheme': AGLS_SCHEME['DCTERMS.created']
         })
         
-        # get global AGLS settings
-        registry = getUtility(IRegistry)
-        
-        # AGLS Author
-        default_author = registry[
-            'pretaweb.agls.browser.controlpanel.IAGLSSchema.default_author']
-        if shasattr(context, 'agls_author_override') and \
-           context.agls_author_override:
-            value = context.agls_author
-        elif default_author:
-            value = default_author
-        else:
-            value = dc.get('DC.creator', '')
         agls_tags.append({
             'name': u'DCTERMS.creator',
-            'content': safe_unicode(value),
+            'content': safe_unicode(agls.Creator() or dc.get('DC.creator', '')),
             'scheme': AGLS_SCHEME['DCTERMS.creator']
         })
-        
-        # AGLS Subject
-        if shasattr(context, 'agls_subject_override') and \
-           context.agls_subject_override:
-            value = '; '.join(context.agls_subject)
-        else:
-            value = '; '.join(dc.get('DC.subject', '').split(', '))
+
+        value = agls.Subject() or '; '.join(dc.get('DC.subject', '').split(', '))
         agls_tags.append({
             'name': u'DCTERMS.subject',
             'content': safe_unicode(value),
@@ -106,29 +72,16 @@ class AGLSViewlet(DublinCoreViewlet):
         })
         
         # AGLS Type
-        value = ''
-        if shasattr(context, 'agls_type_override') and \
-           context.agls_type_override:
-            value = context.agls_type
-        elif shasattr(context, 'AGLSType'):
-            value = context.AGLSType
         agls_tags.append({
             'name': u'DCTERMS.type',
-            'content': safe_unicode(value),
+            'content': safe_unicode(agls.Type()),
             'scheme': AGLS_SCHEME['DCTERMS.type']
         })
         
         # AGLS Identifier
-        if shasattr(context, 'agls_id_override') and \
-           context.agls_id_override:
-            value = u'urn:uuid:' + safe_unicode(context.agls_id)
-        elif shasattr(context, 'UID'):
-            value = u'urn:uuid:' + safe_unicode(context.UID())
-        else:
-            value = safe_unicode(context.absolute_url())
         agls_tags.append({
             'name': u'DCTERMS.identifier',
-            'content': value,
+            'content': agls.Identifier(),
             'scheme': AGLS_SCHEME['DCTERMS.identifier']
         })
         
@@ -141,30 +94,16 @@ class AGLSViewlet(DublinCoreViewlet):
             })
         
         # AGLS Publisher
-        default_publisher = registry[
-            'pretaweb.agls.browser.controlpanel.IAGLSSchema.default_publisher']
-        if shasattr(context, 'agls_publisher_override') and \
-           context.agls_publisher_override:
-            value = context.agls_publisher
-        elif default_publisher:
-            value = default_publisher
-        else:
-            value = dc.get('DC.creator', '') or context.Creator()
         agls_tags.append({
             'name': u'DCTERMS.publisher',
-            'content': safe_unicode(value),
+            'content': safe_unicode(agls.Publisher() or dc.get('DC.creator', '') or context.Creator()),
             'scheme': AGLS_SCHEME['DCTERMS.publisher']
         })
 
         # AGLS Format
-        if shasattr(context, 'agls_format_override') and \
-           context.agls_format_override:
-            value = context.agls_format
-        else:
-            value = dc.get('DC.format', '')
         agls_tags.append({
             'name': u'DCTERMS.format',
-            'content': safe_unicode(value),
+            'content': safe_unicode(agls.Format() or dc.get('DC.format', '')),
             'scheme': AGLS_SCHEME['DCTERMS.format']
         })
 

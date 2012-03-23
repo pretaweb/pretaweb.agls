@@ -3,6 +3,15 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="pretaweb.agls">
 
+    <include package="z3c.jbot" file="meta.zcml" />
+
+    <!-- Need to override several templates -->
+    <browser:jbot
+        directory="jbot"
+        layer=".interfaces.IPackageLayer"
+        />
+
+
   <browser:page
       for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
       name="agls-controlpanel"
@@ -10,6 +19,14 @@
       layer=".interfaces.IPackageLayer"
       permission="cmf.ManagePortal"
       />
+
+    <browser:view
+        for="*"
+        name="agls"
+        class=".agls.AGLSView"
+        layer=".interfaces.IPackageLayer"
+        permission="zope2.View"
+        />
 
   <!-- Override Dublin Core viewlet to make it AGLS complaint -->
   <browser:viewlet
