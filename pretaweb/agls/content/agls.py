@@ -225,7 +225,7 @@ class AGLSModifier(object):
         # move to AGLS schemata
         schema['creation_date'].schemata = 'AGLS Metadata'
         
-        # update desctiption
+        # update description
         schema['creation_date'].widget.description = _(u"Date this "
             "object was created. Used for AGLS Date meta tag.")
             

@@ -7,7 +7,7 @@ def setCreationDate(self, creation_date=None):
     When called without an argument, sets the date to now.
     """
     created = creation_date
-    if created is None:
+    if not created:
         created = DateTime()
     self.getField('creation_date').set(self, created)
 
