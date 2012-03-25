@@ -16,6 +16,7 @@ from pretaweb.agls.config import AGLS_SCHEME
 class AGLSView(BrowserView):
 
     def Title(self):
+        "@return agls override of Title or None"
         context = aq_inner(self.context)
 
         # AGLS Title
@@ -26,6 +27,7 @@ class AGLSView(BrowserView):
             return None
 
     def Description(self):
+        "@return agls override of Description or None"
         context = aq_inner(self.context)
 
         # AGLS Description
@@ -36,6 +38,7 @@ class AGLSView(BrowserView):
             return None
 
     def Created(self):
+        "@return ISO8601 of creation_date"
         context = aq_inner(self.context)
 
         # AGLS Date
@@ -50,11 +53,11 @@ class AGLSView(BrowserView):
         return value
 
     def Creator(self):
+        "@return agls override of author or None"
         context = aq_inner(self.context)
 
         # get global AGLS settings
         registry = getUtility(IRegistry)
-        import pdb; pdb.set_trace()
 
         # AGLS Author
         default_author = registry[
@@ -69,6 +72,7 @@ class AGLSView(BrowserView):
         return value
 
     def Subject(self):
+        "@return agls override of Subject or None"
         context = aq_inner(self.context)
 
         # AGLS Subject
@@ -80,6 +84,7 @@ class AGLSView(BrowserView):
         return value
 
     def Type(self):
+        "@return agls tyoe"
         context = aq_inner(self.context)
 
         # AGLS Type
@@ -92,6 +97,7 @@ class AGLSView(BrowserView):
         return safe_unicode(value)
 
     def Identifier(self):
+        "@return agls identifier or UUID"
         context = aq_inner(self.context)
 
         # AGLS Identifier
@@ -105,6 +111,7 @@ class AGLSView(BrowserView):
         return value
 
     def Publisher(self):
+        "@return agls publisher or None"
         context = aq_inner(self.context)
         # get global AGLS settings
         registry = getUtility(IRegistry)
@@ -122,6 +129,7 @@ class AGLSView(BrowserView):
         return safe_unicode(value)
 
     def Format(self):
+        "@return agls format override"
         context = aq_inner(self.context)
         # get global AGLS settings
         registry = getUtility(IRegistry)

@@ -25,7 +25,9 @@
         name="agls"
         class=".agls.AGLSView"
         layer=".interfaces.IPackageLayer"
-        permission="zope2.View"
+        permission="zope.Public"
+        allowed_interface=".interfaces.IAGLSView"
+        allowed_attributes="Created Creator Title Description Subject Type Identifier Publisher  Format"
         />
 
   <!-- Override Dublin Core viewlet to make it AGLS complaint -->
