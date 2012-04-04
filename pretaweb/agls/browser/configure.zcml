@@ -30,6 +30,9 @@
         allowed_attributes="Created Creator Title Description Subject Type Identifier Publisher  Format"
         />
 
+    <!-- Custom indexers -->
+    <adapter name="agls_subject" factory=".agls.agls_subject" />
+
   <!-- Override Dublin Core viewlet to make it AGLS complaint -->
   <browser:viewlet
       name="plone.htmlhead.dublincore"

@@ -89,10 +89,7 @@ class AGLSView(BrowserView):
 
         # AGLS Type
         value = ''
-        if shasattr(context, 'agls_type_override') and \
-           context.agls_type_override:
-            value = context.agls_type
-        elif shasattr(context, 'AGLSType'):
+        if shasattr(context, 'AGLSType'):
             value = context.AGLSType
         return safe_unicode(value)
 
@@ -141,3 +138,18 @@ class AGLSView(BrowserView):
         else:
             value = None
         return safe_unicode(value)
+
+from plone.indexer import indexer
+
+# The interface used should be the same as in ../content/agls
+from Products.Archetypes.interfaces import IBaseContent
+#from Products.ATContentTypes.interface import IATContentType
+
+
+@indexer(IBaseContent)
+def agls_subject(object, **kw):
+    return object.unrestrictedTraverse('agls').Subject()
+
+@indexer(IBaseContent)
+def agls_subject(object, **kw):
+    return object.unrestrictedTraverse('agls').Subject()

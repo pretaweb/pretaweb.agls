@@ -66,14 +66,14 @@
                     agls nocall: obj_item/@@agls">
     <title tal:content="agls/Title| obj_item/pretty_title_or_id">Title</title>
     <link tal:content="agls/Identifier | obj_item/Identifier">Identifier</link>
-    <description tal:content="obj_item/Description">Description</description>
+    <description tal:content="agls/Description | obj_item/Description">Description</description>
     <content:encoded xmlns:content="http://purl.org/rss/1.0/modules/content/"
         tal:condition="has_text"
         tal:content="structure python:'&lt;![CDATA[' + text + ']]&gt;'">Content</content:encoded>
     <dc:publisher tal:content="agls/Publisher | obj_item/Publisher">Publisher</dc:publisher>
     <dc:creator tal:condition="creator" tal:define="author python:getMemberInfo(creator)" tal:content="python:agls.Creator() or author and author['fullname'] or creator">Creator</dc:creator>
     <dc:rights tal:content="obj_item/Rights">Rights</dc:rights>
-    <tal:block tal:repeat="item obj_item/Subject">
+    <tal:block tal:repeat="item agls/Subject | obj_item/Subject">
       <dc:subject tal:content="item">Item</dc:subject>
     </tal:block>
     <dc:date tal:content="python: agls.Created() or has_effective and effective or modified">Published or last modified date if no published date</dc:date>
