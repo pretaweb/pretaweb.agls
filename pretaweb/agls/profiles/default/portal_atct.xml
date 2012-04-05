@@ -2,7 +2,7 @@
 <atcttool>
  <topic_indexes>
   <index
-    name="AGLSType"
+    name="agls_type"
     description="AGLS Type"
     enabled="True"
     friendlyName="AGLS Type">
@@ -12,7 +12,7 @@
  </topic_indexes>
  <topic_metadata>
   <metadata
-    name="AGLSType"
+    name="agls_type"
         description="AGLS Type"
         enabled="True"
         friendlyName="AGLS Type"/>

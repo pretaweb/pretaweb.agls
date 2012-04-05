@@ -32,6 +32,7 @@
 
     <!-- Custom indexers -->
     <adapter name="agls_subject" factory=".agls.agls_subject" />
+    <adapter name="agls_type" factory=".agls.agls_type" />
 
   <!-- Override Dublin Core viewlet to make it AGLS complaint -->
   <browser:viewlet

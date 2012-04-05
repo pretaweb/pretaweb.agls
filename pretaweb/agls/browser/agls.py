@@ -151,5 +151,5 @@ def agls_subject(object, **kw):
     return object.unrestrictedTraverse('agls').Subject()
 
 @indexer(IBaseContent)
-def agls_subject(object, **kw):
-    return object.unrestrictedTraverse('agls').Subject()
+def agls_type(context, **kw):
+    return context.Schema()['AGLSType'].get(context)

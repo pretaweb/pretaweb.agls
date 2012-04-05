@@ -12,9 +12,9 @@
     <column value="agls_subject"/>
 -->
     
-    <index name="AGLSType" meta_type="FieldIndex">
-        <indexed_attr value="getAGLSType"/>
+    <index name="agls_type" meta_type="FieldIndex">
+        <indexed_attr value="agls_type"/>
     </index>
-    <column value="getAGLSType"/>
+    <column value="agls_type"/>
 
 </object>
