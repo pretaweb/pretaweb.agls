@@ -64,20 +64,20 @@
                     modified python:obj_item.modified().HTML4();
                     creator obj_item/Creator|nothing;
                     agls nocall: obj_item/@@agls">
-    <title tal:content="agls/Title| obj_item/pretty_title_or_id">Title</title>
-    <link tal:content="agls/Identifier | obj_item/Identifier">Identifier</link>
-    <description tal:content="agls/Description | obj_item/Description">Description</description>
+    <title tal:content="python: agls.Title() or obj_item.pretty_title_or_id()">Title</title>
+    <link tal:content="obj_item/Identifier">Identifier</link> <!-- agls/Identifier seems to be a different concept to obj_item/Identifier -->
+    <description tal:content="python: agls.Description() or obj_item.Description()">Description</description>
     <content:encoded xmlns:content="http://purl.org/rss/1.0/modules/content/"
         tal:condition="has_text"
         tal:content="structure python:'&lt;![CDATA[' + text + ']]&gt;'">Content</content:encoded>
-    <dc:publisher tal:content="agls/Publisher | obj_item/Publisher">Publisher</dc:publisher>
+    <dc:publisher tal:content="python: agls.Publisher() or obj_item.Publisher()">Publisher</dc:publisher>
     <dc:creator tal:condition="creator" tal:define="author python:getMemberInfo(creator)" tal:content="python:agls.Creator() or author and author['fullname'] or creator">Creator</dc:creator>
     <dc:rights tal:content="obj_item/Rights">Rights</dc:rights>
-    <tal:block tal:repeat="item agls/Subject | obj_item/Subject">
+    <tal:block tal:repeat="item python: agls.Subject() or obj_item.Subject()">
       <dc:subject tal:content="item">Item</dc:subject>
     </tal:block>
     <dc:date tal:content="python: agls.Created() or has_effective and effective or modified">Published or last modified date if no published date</dc:date>
-    <dc:type tal:content="agls/Type | obj_item/Type">Type</dc:type>
+    <dc:type tal:content="python: agls.Type() or obj_item.Type()">Type</dc:type>
   </item>
 </tal:block>
 
