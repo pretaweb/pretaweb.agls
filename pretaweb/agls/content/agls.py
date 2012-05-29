@@ -52,6 +52,7 @@ Report
 Research
 Standard
 Strategy
+Template
 Terms of reference
 Video
 Websites
