@@ -15,6 +15,6 @@
     name="agls_type"
         description="AGLS Type"
         enabled="True"
-        friendlyName="AGLS Type"/>
+        friendlyName="Type"/>
  </topic_metadata>
 </atcttool>
