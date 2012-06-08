@@ -65,16 +65,46 @@ AGLS_TYPES_VOCAB = DisplayList([(v,v) for v in AGLS_TYPES.split('\n') if v.strip
 
 
 
-# AGLS fields extender
-class AGLSExtender(object):
+
+class AGLSModifier(object):
+    """Here we update creation date field to display it under AGLS tab"""
+
+    adapts(IBaseContent)
+    implements(ISchemaModifier, IBrowserLayerAwareExtender)
+    
+    layer = IPackageLayer
+    
+    def __init__(self, context):
+        self.context = context
+        
+    def fiddle(self, schema):
+        if schema.get('creation_date', None) is None:
+            return
+
+        for f in self.getFields():
+            schema.addField(f)
+
+        # move to AGLS schemata
+        schema['creation_date'].schemata = 'AGLS Overrides'
+        
+        # update description
+        schema['creation_date'].widget.description = _(u"Date this "
+            "object was created. Used for AGLS Date meta tag.")
+            
+        # unhide it
+        schema['creation_date'].widget.visible = {'edit': 'visible',
+            'view': 'invisible'}
+        
+        # set starting year
+        schema['creation_date'].widget.starting_year = 1990
+        
+        # move after AGLS description field
+        schema.moveField('creation_date', after='agls_desc')
+
     """Adds AGLS fields to all archetypes objects that are used to override
     AGLA meta tags on a page on per object bases.
     """
     
-    adapts(IBaseContent)
-    implements(ISchemaExtender, IBrowserLayerAwareExtender)
-    
-    layer = IPackageLayer
     
     fields = [
         # AGLS Title
@@ -222,41 +252,7 @@ class AGLSExtender(object):
         
     ]
 
-    def __init__(self, context):
-        self.context = context
     
     def getFields(self):
         """Return list of new fields we contribute to content"""
         return self.fields
-
-class AGLSModifier(object):
-    """Here we update creation date field to display it under AGLS tab"""
-
-    adapts(IBaseContent)
-    implements(ISchemaModifier, IBrowserLayerAwareExtender)
-    
-    layer = IPackageLayer
-    
-    def __init__(self, context):
-        self.context = context
-        
-    def fiddle(self, schema):
-        if schema.get('creation_date', None) is None:
-            return
-        
-        # move to AGLS schemata
-        schema['creation_date'].schemata = 'AGLS Overrides'
-        
-        # update description
-        schema['creation_date'].widget.description = _(u"Date this "
-            "object was created. Used for AGLS Date meta tag.")
-            
-        # unhide it
-        schema['creation_date'].widget.visible = {'edit': 'visible',
-            'view': 'invisible'}
-        
-        # set starting year
-        schema['creation_date'].widget.starting_year = 1990
-        
-        # move after AGLS description field
-        schema.moveField('creation_date', after='agls_desc')
