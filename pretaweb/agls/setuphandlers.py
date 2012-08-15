@@ -30,7 +30,7 @@ def add_catalog_indexes(context, logger=None):
     catalog = getToolByName(context, 'portal_catalog')
     indexes = catalog.indexes()
     # Specify the indexes you want, with ('index_name', 'index_type')
-    wanted = (('agls_type ', 'FieldIndex'),
+    wanted = (('agls_type', 'FieldIndex'),
               )
     indexables = []
     for name, meta_type in wanted:
@@ -57,7 +57,6 @@ def install(context):
 def uninstall(context):
     """Install step for configuration that is not handled in xml files."""
     # Only run step if a flag file is present
-    import pdb; pdb.set_trace()
     if not context.readDataFile('pretaweb.agls.uninstall.txt'):
         return
 
