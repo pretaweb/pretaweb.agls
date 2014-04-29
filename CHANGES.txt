@@ -1,8 +1,10 @@
 Changelog
 =========
 
-1.0 (xxxx-xx-xx)
-----------------
+1.0alpha1 (unreleased)
+----------------------
 
+- Add uninstall step for browserlayer [Ivan Teoh]
+- Fix the Schema could not find 'agls_type'
 - Created recipe with ZopeSkel
   [Vitaliy Podoba]
