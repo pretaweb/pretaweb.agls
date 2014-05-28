@@ -152,9 +152,15 @@ def agls_subject(object, **kw):
 
 @indexer(IBaseContent)
 def agls_type(context, **kw):
+<<<<<<< HEAD
     schema = context.Schema()
     atype = schema.getitem('AGLSType', None)
     if atype is not None:
         return atype.get(context)
     else:
         return None
+=======
+    if context.Schema().get('AGLSType', None) is None:
+        return
+    return context.Schema()['AGLSType'].get(context)
+>>>>>>> f4c581600855793123ee14a2fb772d4178d1fe33
