@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.0beta1
+--------
+
+- handle if schema isn't found. don't error
+- uninstall properly
+
 1.0 (xxxx-xx-xx)
 ----------------
 
