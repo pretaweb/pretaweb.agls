@@ -57,10 +57,11 @@ setup(name='pretaweb.agls',
       install_requires=['setuptools',
                         'plone.app.z3cform',
                         'collective.z3cform.keywordwidget',
+                        'z3c.jbot'
                         # -*- Extra requirements: -*-
                         ],
       tests_require=tests_require,
-      extras_require=dict(tests=tests_require),
+      extras_require=dict(test=tests_require),
       test_suite='pretaweb.agls.tests.test_docs.test_suite',
       entry_points="""
       # -*- entry_points -*-
