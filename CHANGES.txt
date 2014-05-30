@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.0 (30-May-2013)
+-----------------
+- initial public release
+
+
 1.0alpha1 (unreleased)
 ----------------------
 
