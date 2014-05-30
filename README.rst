@@ -1,6 +1,9 @@
 Introduction
 ============
 
+.. image:: https://secure.travis-ci.org/collective/pretaweb.agls.png
+    :target: http://travis-ci.org/collective/pretaweb.agls
+
 This package introduces AGLS Metadata into Plone pages.
 
 

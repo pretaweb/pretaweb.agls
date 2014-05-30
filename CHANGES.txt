@@ -1,9 +1,15 @@
 Changelog
 =========
 
+1.0.1 (30-May-2013)
+-----------------
+- fixed incorrect merge [djay]
+- put in place travis testing [djay]
+
+
 1.0 (30-May-2013)
 -----------------
-- initial public release
+- initial public release [djay]
 
 
 1.0alpha1 (unreleased)
