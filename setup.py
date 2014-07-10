@@ -9,10 +9,10 @@ from setuptools import setup, find_packages
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-version = '1.1dev'
+version = '1.0.2'
 
 long_description = (
-    read('README.txt')
+    read('README.rst')
     + '\n' +
     'Change history\n'
     '**************\n'
@@ -46,9 +46,9 @@ setup(name='pretaweb.agls',
         'License :: OSI Approved :: GNU General Public License (GPL)',
         ],
       keywords='plone agls metadata',
-      author='Vitaliy Podoba',
-      author_email='vitaliypodoba@gmail.com',
-      url='http://svn.plone.org/svn/collective/',
+      author='Dylan Jay',
+      author_email='software@pretaweb.com',
+      url='https://github.com/djay/pretaweb.agls',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['pretaweb', ],
@@ -57,10 +57,11 @@ setup(name='pretaweb.agls',
       install_requires=['setuptools',
                         'plone.app.z3cform',
                         'collective.z3cform.keywordwidget',
+                        'z3c.jbot'
                         # -*- Extra requirements: -*-
                         ],
       tests_require=tests_require,
-      extras_require=dict(tests=tests_require),
+      extras_require=dict(test=tests_require),
       test_suite='pretaweb.agls.tests.test_docs.test_suite',
       entry_points="""
       # -*- entry_points -*-
