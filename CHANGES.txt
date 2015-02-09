@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.0.4 (unreleased)
+------------------
+- Add default value for title, description and format [ivanteoh]
+
 1.0.3 (09-October-2014)
 ------------------
 - Fix the agls index zero error [ivanteoh]
