@@ -1,7 +1,6 @@
 from Acquisition import aq_inner
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import safe_unicode
 from plone.app.layout.viewlets.common import DublinCoreViewlet
 
@@ -23,13 +22,10 @@ class AGLSViewlet(DublinCoreViewlet):
         for tag in self.metatags:
             dc[tag[0]] = tag[1]
 
-        plone_utils = getToolByName(self.context, 'plone_utils')
         context = aq_inner(self.context)
         agls_tags = []
 
         agls = context.unrestrictedTraverse("@@agls")
-
-
 
         # AGLS Title (mandatory)
         value = agls.Title() or dc.get('DC.Title', '') or context.Title()
