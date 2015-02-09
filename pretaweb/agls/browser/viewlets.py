@@ -1,12 +1,8 @@
 from Acquisition import aq_inner
 
-from zope.component import getUtility
-
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import safe_unicode
-from Products.Archetypes.utils import shasattr
-
-from plone.registry.interfaces import IRegistry
 from plone.app.layout.viewlets.common import DublinCoreViewlet
 
 from pretaweb.agls.config import AGLS_SCHEME
@@ -27,10 +23,14 @@ class AGLSViewlet(DublinCoreViewlet):
         for tag in self.metatags:
             dc[tag[0]] = tag[1]
 
+        plone_utils = getToolByName(self.context, 'plone_utils')
         context = aq_inner(self.context)
         agls_tags = []
 
         agls = context.unrestrictedTraverse("@@agls")
+
+
+
         # AGLS Title (mandatory)
         value = agls.Title() or dc.get('DC.Title', '') or context.Title()
         agls_tags.append({
@@ -104,9 +104,18 @@ class AGLSViewlet(DublinCoreViewlet):
         })
 
         # AGLS Format
+        default_format = ''
+        format_method = getattr(context.aq_explicit, 'Format', None)
+        if callable(format_method):
+            # Catch AttributeErrors raised by some AT applications
+            try:
+                default_format = format_method()
+            except AttributeError:
+                pass
+
         agls_tags.append({
             'name': u'DCTERMS.format',
-            'content': safe_unicode(agls.Format() or dc.get('DC.format', '')),
+            'content': safe_unicode(agls.Format() or dc.get('DC.format', '') or default_format),
             'scheme': AGLS_SCHEME['DCTERMS.format']
         })
 
