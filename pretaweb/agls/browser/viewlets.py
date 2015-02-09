@@ -71,9 +71,18 @@ class AGLSViewlet(DublinCoreViewlet):
         })
 
         # AGLS Type (mandatory)
+        default_type = ''
+        type_method = getattr(context.aq_explicit, 'Type', None)
+        if callable(type_method):
+            # Catch AttributeErrors raised by some AT applications
+            try:
+                default_type = type_method()
+            except AttributeError:
+                pass
+
         agls_tags.append({
             'name': u'DCTERMS.type',
-            'content': safe_unicode(agls.Type()),
+            'content': safe_unicode(agls.Type() or default_type),
             'scheme': AGLS_SCHEME['DCTERMS.type']
         })
 
