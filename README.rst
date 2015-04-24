@@ -26,8 +26,8 @@ Works for the next Plone content type frameworks:
 Useful Links
 ============
 
-* AGLS Standard:
-    http://www.agls.gov.au/
+* `AGLS Standard`_
+* `AGLS Usage Guide`_
 
-* AGLS Usage Guide:
-    http://www.agls.gov.au/pdf/AGLS%20Metadata%20Standard%20Part%202%20Usage%20Guide.PDF
+.. _AGLS Standard: http://www.agls.gov.au/
+.. _AGLS Usage Guide: http://www.agls.gov.au/pdf/AGLS%20Metadata%20Standard%20Part%202%20Usage%20Guide.PDF
