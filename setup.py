@@ -32,7 +32,7 @@ long_description = (
     'Download\n'
     '********\n')
 
-tests_require = ['zope.testing']
+tests_require = ['zope.testing', 'Products.PloneTestCase']
 
 setup(name='pretaweb.agls',
       version=version,
