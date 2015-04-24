@@ -10,5 +10,6 @@ var
 .installed.cfg
 .mr.developer.cfg
 develop-eggs
+setup.cfg
 parts
 *.swp
