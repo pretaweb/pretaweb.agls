@@ -9,7 +9,7 @@ from setuptools import setup, find_packages
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-version = '1.0.4'
+version = '1.0.5'
 
 long_description = '\n'.join([
     read('README.rst'),
@@ -35,7 +35,7 @@ setup(name='pretaweb.agls',
       author='Dylan Jay',
       author_email='software@pretaweb.com',
       url='https://github.com/pretaweb/pretaweb.agls',
-      download_url = 'https://github.com/pretaweb/pretaweb.agls/tarball/1.0.4',
+      download_url = 'https://github.com/pretaweb/pretaweb.agls/tarball/1.0.5',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['pretaweb', ],

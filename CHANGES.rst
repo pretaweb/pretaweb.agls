@@ -1,9 +1,11 @@
 Changelog
 =========
 
-1.0.5 (Unreleased)
-------------------
+1.0.5 (25-April-2015)
+---------------------
 
+- Fix the documentation display nicely in pypi.
+  [ivanteoh]
 
 1.0.4 (24-April-2015)
 ---------------------
