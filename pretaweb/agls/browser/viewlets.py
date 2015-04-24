@@ -24,7 +24,7 @@ class AGLSViewlet(DublinCoreViewlet):
         context = aq_inner(self.context)
         agls_tags = []
 
-        agls = context.unrestrictedTraverse("@@agls")
+        agls = context.unrestrictedTraverse('@@agls')
 
         # AGLS Title (mandatory)
         value = agls.Title() or dc.get('DC.Title', '') or context.Title()

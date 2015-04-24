@@ -90,7 +90,7 @@ class AGLSModifier(object):
 
         # update description
         schema['creation_date'].widget.description = _(
-            u"Date this object was created. Used for AGLS Date meta tag.")
+            u'Date this object was created. Used for AGLS Date meta tag.')
 
         # unhide it
         schema['creation_date'].widget.visible = {
@@ -110,21 +110,21 @@ class AGLSModifier(object):
     fields = [
         # AGLS Title
         ExtensionBooleanField(
-            "agls_title_override",
-            schemata="AGLS Overrides",
+            'agls_title_override',
+            schemata='AGLS Overrides',
             widget=atapi.BooleanWidget(
-                label=_(u"Override AGLS Title"),
+                label=_(u'Override AGLS Title'),
                 description=_(u"By default object's title field is used.")
             ),
             required=False,
             default=False
         ),
         ExtensionStringField(
-            "agls_title",
-            schemata="AGLS Overrides",
+            'agls_title',
+            schemata='AGLS Overrides',
             widget=atapi.StringWidget(
-                label=_(u"AGLS Title"),
-                description=_(u"Enter here custom title to use in AGLS tag.")
+                label=_(u'AGLS Title'),
+                description=_(u'Enter here custom title to use in AGLS tag.')
             ),
             required=False,
             default=''
@@ -132,10 +132,10 @@ class AGLSModifier(object):
 
         # AGLS Description
         ExtensionBooleanField(
-            "agls_desc_override",
-            schemata="AGLS Overrides",
+            'agls_desc_override',
+            schemata='AGLS Overrides',
             widget=atapi.BooleanWidget(
-                label=_(u"Override AGLS Description"),
+                label=_(u'Override AGLS Description'),
                 description=_(
                     u"By default object's description field is used.")
             ),
@@ -143,14 +143,14 @@ class AGLSModifier(object):
             default=False
         ),
         ExtensionTextField(
-            "agls_desc",
-            schemata="AGLS Overrides",
+            'agls_desc',
+            schemata='AGLS Overrides',
             default_content_type='text/plain',
             allowable_content_types=('text/plain',),
             widget=atapi.TextAreaWidget(
-                label=_(u"AGLS Description"),
-                description=_(u"Enter here custom description to use in AGLS "
-                              "tag.")
+                label=_(u'AGLS Description'),
+                description=_(u'Enter here custom description to use in AGLS '
+                              'tag.')
             ),
             required=False,
             default=''
@@ -158,33 +158,33 @@ class AGLSModifier(object):
 
         # AGLS Author
         ExtensionBooleanField(
-            "agls_author_override",
-            schemata="AGLS Overrides",
+            'agls_author_override',
+            schemata='AGLS Overrides',
             widget=atapi.BooleanWidget(
-                label=_(u"Override AGLS Author"),
+                label=_(u'Override AGLS Author'),
                 description=_(u"By default object's creator field is used or "
-                              "global control panel settings if configured.")
+                              'global control panel settings if configured.')
             ),
             required=False,
             default=False
         ),
         ExtensionStringField(
-            "agls_author",
-            schemata="AGLS Overrides",
+            'agls_author',
+            schemata='AGLS Overrides',
             widget=atapi.StringWidget(
-                label=_(u"AGLS Author"),
-                description=_(u"Enter here custom author to use in AGLS tag.")
+                label=_(u'AGLS Author'),
+                description=_(u'Enter here custom author to use in AGLS tag.')
             ),
             required=False,
             default=''
         ),
 
         ExtensionStringField(
-            "AGLSType",
-            schemata="categorization",
+            'AGLSType',
+            schemata='categorization',
             widget=atapi.SelectionWidget(
-                label=_(u"AGLS Type"),
-                description=_(u"Enter here text line to use in AGLS Type tag.")
+                label=_(u'AGLS Type'),
+                description=_(u'Enter here text line to use in AGLS Type tag.')
             ),
             required=False,
             default='',
@@ -195,23 +195,23 @@ class AGLSModifier(object):
 
         # AGLS Identifier
         ExtensionBooleanField(
-            "agls_id_override",
-            schemata="AGLS Overrides",
+            'agls_id_override',
+            schemata='AGLS Overrides',
             widget=atapi.BooleanWidget(
-                label=_(u"Override AGLS Identifier"),
+                label=_(u'Override AGLS Identifier'),
                 description=_(u"By default object's UID attribute is used for "
-                              "AGLS tag.")
+                              'AGLS tag.')
             ),
             required=False,
             default=False
         ),
         ExtensionStringField(
-            "agls_id",
-            schemata="AGLS Overrides",
+            'agls_id',
+            schemata='AGLS Overrides',
             widget=atapi.StringWidget(
-                label=_(u"AGLS Identifier"),
-                description=_(u"Enter here custom identifier to use in AGLS "
-                              "tag.")
+                label=_(u'AGLS Identifier'),
+                description=_(u'Enter here custom identifier to use in AGLS '
+                              'tag.')
             ),
             required=False,
             default=''
@@ -219,23 +219,23 @@ class AGLSModifier(object):
 
         # AGLS Publisher
         ExtensionBooleanField(
-            "agls_publisher_override",
-            schemata="AGLS Overrides",
+            'agls_publisher_override',
+            schemata='AGLS Overrides',
             widget=atapi.BooleanWidget(
-                label=_(u"Override AGLS Publisher"),
+                label=_(u'Override AGLS Publisher'),
                 description=_(u"By default object's creator field is used or "
-                              "global control panel settings if configured.")
+                              'global control panel settings if configured.')
             ),
             required=False,
             default=False
         ),
         ExtensionStringField(
-            "agls_publisher",
-            schemata="AGLS Overrides",
+            'agls_publisher',
+            schemata='AGLS Overrides',
             widget=atapi.StringWidget(
-                label=_(u"AGLS Publisher"),
-                description=_(u"Enter here custom publisher to use in AGLS "
-                              "tag.")
+                label=_(u'AGLS Publisher'),
+                description=_(u'Enter here custom publisher to use in AGLS '
+                              'tag.')
             ),
             required=False,
             default=''
@@ -243,25 +243,25 @@ class AGLSModifier(object):
 
         # AGLS Format
         ExtensionBooleanField(
-            "agls_format_override",
-            schemata="AGLS Overrides",
+            'agls_format_override',
+            schemata='AGLS Overrides',
             widget=atapi.BooleanWidget(
-                label=_(u"Override AGLS Format"),
+                label=_(u'Override AGLS Format'),
                 description=_(
                     u"By default object's content-type will be used. "
-                    u"Either html or file mime-type for File/Image "
-                    u"based content types.")
+                    u'Either html or file mime-type for File/Image '
+                    u'based content types.')
             ),
             required=False,
             default=False
         ),
         ExtensionStringField(
-            "agls_format",
-            schemata="AGLS Overrides",
+            'agls_format',
+            schemata='AGLS Overrides',
             widget=atapi.StringWidget(
-                label=_(u"AGLS Format"),
-                description=_(u"Enter here custom format to use in AGLS "
-                              "tag.")
+                label=_(u'AGLS Format'),
+                description=_(u'Enter here custom format to use in AGLS '
+                              'tag.')
             ),
             required=False
         ),
