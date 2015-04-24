@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from Testing import ZopeTestCase as ztc
 from pretaweb.agls.tests import base
 

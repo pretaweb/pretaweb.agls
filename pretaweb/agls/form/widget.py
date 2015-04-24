@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.Widget import KeywordWidget
 from Products.CMFCore.utils import getToolByName

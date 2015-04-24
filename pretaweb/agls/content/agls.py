@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from Products.Archetypes import public as atapi
 from Products.Archetypes.atapi import DisplayList
 from Products.Archetypes.interfaces import IBaseContent
