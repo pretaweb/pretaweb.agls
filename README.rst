@@ -19,7 +19,6 @@ Works for the next Plone content type frameworks:
 * Dexterity
 
 
-
 Useful Links
 ------------
 
