@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.4 (23-April-2015)
+1.0.4 (24-April-2015)
 ---------------------
 - Add default value for title, description, type and format as if Dublin Core metadata is turned on [ivanteoh]
 
