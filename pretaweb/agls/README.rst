@@ -46,3 +46,5 @@ submit click.  We then ensure that we get the friendly logged-in message:
 Finally, let's return to the front page of our site before continuing
 
     >>> browser.open(portal_url)
+
+-*- extra stuff goes here -*-
