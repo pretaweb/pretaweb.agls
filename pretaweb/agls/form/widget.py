@@ -17,7 +17,7 @@ import zope.schema.interfaces
 class MultipleIndexKeywordWidget(KeywordWidget):
     _properties = KeywordWidget._properties.copy()
     _properties.update({
-        'macro': "multipleindexkeyword_widget",
+        'macro': 'multipleindexkeyword_widget',
         'indexes': ()  # list of catalog indexes to get existing keywords from
     })
 
