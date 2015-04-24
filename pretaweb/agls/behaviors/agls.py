@@ -1,25 +1,16 @@
-from AccessControl.SecurityManagement import getSecurityManager
-
-from zope import schema
-from zope.interface import alsoProvides
-
-from z3c.form.interfaces import IEditForm, IAddForm
-from plone.directives import form
-from plone.autoform.interfaces import IFormFieldProvider
-from plone.app.dexterity.behaviors.metadata import DCFieldProperty, \
-    ICategorization, Categorization
-
+# -*- coding: utf-8 -*-
 from collective.z3cform.keywordwidget.field import Keywords
-from collective.z3cform.keywordwidget.widget import KeywordFieldWidget
-
-try:
-    from z3c.form.browser.textlines import TextLinesFieldWidget
-except ImportError:
-    from plone.z3cform.textlines.textlines import TextLinesFieldWidget
-
+from plone.app.dexterity.behaviors.metadata import Categorization
+from plone.app.dexterity.behaviors.metadata import DCFieldProperty
+from plone.app.dexterity.behaviors.metadata import ICategorization
+from plone.autoform.interfaces import IFormFieldProvider
+from plone.directives import form
 from pretaweb.agls.form.widget import Z3CFormKeywordFieldWidget
 from pretaweb.agls import messageFactory as _
-
+from z3c.form.interfaces import IAddForm
+from z3c.form.interfaces import IEditForm
+from zope import schema
+from zope.interface import alsoProvides
 
 # Behavior interface to display AGLS Metadata fields on Dexterity
 # content edit forms.
@@ -36,80 +27,80 @@ AGLS_FIELDS = (
     'agls_format_override', 'agls_format'
 )
 
+
 class IAGLS(form.Schema):
     """Here we define new AGLS fieldset as well as extend and modify
     existing Categorization fielset:
-    
+
       * add AGLSType field
       * set KeywordWidget to subjects field
     """
-    
+
     # Categorization fieldset
     form.fieldset(
         'categorization',
         label=_(u'Categorization'),
         fields=['subjects', 'language', 'AGLSType'],
     )
-    
+
     subjects = Keywords(
         title=_(u'label_categories', default=u'Categories'),
-        description=_(u'help_categories', default=u"Also known as keywords, "
-                      "tags or labels, these help you categorize your "
-                      "content."),
+        description=_(u'help_categories', default=u'Also known as keywords, '
+                      'tags or labels, these help you categorize your '
+                      'content.'),
         required=False,
         value_type=schema.TextLine(),
         missing_value=()
     )
     form.widget(subjects=Z3CFormKeywordFieldWidget)
-    
+
     language = ICategorization['language']
-    
+
     # Main AGLS Type
     AGLSType = schema.TextLine(
-        title=_(u"AGLS Type"),
-        description=_(u"Enter here text line to use in AGLS Type tag."),
+        title=_(u'AGLS Type'),
+        description=_(u'Enter here text line to use in AGLS Type tag.'),
         required=False,
         default=u'',
         missing_value=u''
     )
-    
-    
+
     # AGLS fieldset
     form.fieldset(
         'agls_metadata',
         label=_(u'Agls metadata'),
         fields=list(AGLS_FIELDS),
     )
-    
+
     # AGLS Title
     agls_title_override = schema.Bool(
-        title=_(u"Override AGLS Title"),
+        title=_(u'Override AGLS Title'),
         description=_(u"By default object's title field is used."),
         required=False,
         default=False,
         missing_value=False
     )
-    
+
     agls_title = schema.TextLine(
-        title=_(u"AGLS Title"),
-        description=_(u"Enter here custom title to use in AGLS tag."),
+        title=_(u'AGLS Title'),
+        description=_(u'Enter here custom title to use in AGLS tag.'),
         required=False,
         default=u'',
         missing_value=u''
     )
-    
+
     # AGLS Description
     agls_desc_override = schema.Bool(
-        title=_(u"Override AGLS Description"),
+        title=_(u'Override AGLS Description'),
         description=_(u"By default object's description field is used."),
         required=False,
         default=False,
         missing_value=False
     )
-    
+
     agls_desc = schema.Text(
-        title=_(u"AGLS Description"),
-        description=_(u"Enter here custom description to use in AGLS tag."),
+        title=_(u'AGLS Description'),
+        description=_(u'Enter here custom description to use in AGLS tag.'),
         required=False,
         default=u'',
         missing_value=u''
@@ -117,25 +108,25 @@ class IAGLS(form.Schema):
 
     # AGLS Date
     creation_date = schema.Datetime(
-        title=_(u"Creation Date"),
-        description=_(u"Date this object was created. Used for AGLS Date meta "
-                      "tag."),
+        title=_(u'Creation Date'),
+        description=_(u'Date this object was created. Used for AGLS Date meta '
+                      'tag.'),
         required=False
     )
-    
+
     # AGLS Author
     agls_author_override = schema.Bool(
-        title=_(u"Override AGLS Author"),
+        title=_(u'Override AGLS Author'),
         description=_(u"By default object's creator field is used or global "
-                      "control panel settings if configured."),
+                      'control panel settings if configured.'),
         required=False,
         default=False,
         missing_value=False
     )
-    
+
     agls_author = schema.TextLine(
-        title=_(u"AGLS Author"),
-        description=_(u"Enter here custom author to use in AGLS tag."),
+        title=_(u'AGLS Author'),
+        description=_(u'Enter here custom author to use in AGLS tag.'),
         required=False,
         default=u'',
         missing_value=u''
@@ -143,17 +134,18 @@ class IAGLS(form.Schema):
 
     # AGLS Type
     agls_type_override = schema.Bool(
-        title=_(u"Override AGLS Type"),
-        description=_(u"By default object's AGLS Type, from Categorization tab,"
-                      " field is used in AGLS tag."),
+        title=_(u'Override AGLS Type'),
+        description=_(
+            u"By default object's AGLS Type, from Categorization tab,"
+            u' field is used in AGLS tag.'),
         required=False,
         default=False,
         missing_value=False
     )
-    
+
     agls_type = schema.TextLine(
-        title=_(u"AGLS Type"),
-        description=_(u"Enter here custom Type to use in AGLS Type Tag."),
+        title=_(u'AGLS Type'),
+        description=_(u'Enter here custom Type to use in AGLS Type Tag.'),
         required=False,
         default=u'',
         missing_value=u''
@@ -161,59 +153,59 @@ class IAGLS(form.Schema):
 
     # AGLS Identifier
     agls_id_override = schema.Bool(
-        title=_(u"Override AGLS Identifier"),
+        title=_(u'Override AGLS Identifier'),
         description=_(u"By default object's UID attribute is used for AGLS "
-                      "tag."),
+                      'tag.'),
         required=False,
         default=False,
         missing_value=False
     )
-    
+
     agls_id = schema.TextLine(
-        title=_(u"AGLS Identifier"),
-        description=_(u"Enter here custom identifier to use in AGLS tag."),
+        title=_(u'AGLS Identifier'),
+        description=_(u'Enter here custom identifier to use in AGLS tag.'),
         required=False,
         default=u'',
         missing_value=u''
     )
-    
+
     # AGLS Publisher
     agls_publisher_override = schema.Bool(
-        title=_(u"Override AGLS Publisher"),
+        title=_(u'Override AGLS Publisher'),
         description=_(u"By default object's creator field is used or global "
-                      "control panel settings if configured."),
+                      'control panel settings if configured.'),
         required=False,
         default=False,
         missing_value=False
     )
-    
+
     agls_publisher = schema.TextLine(
-        title=_(u"AGLS Publisher"),
-        description=_(u"Enter here custom publisher to use in AGLS tag."),
+        title=_(u'AGLS Publisher'),
+        description=_(u'Enter here custom publisher to use in AGLS tag.'),
         required=False,
         default=u'',
         missing_value=u''
     )
-    
+
     # AGLS Format
     agls_format_override = schema.Bool(
-        title=_(u"Override AGLS Format"),
+        title=_(u'Override AGLS Format'),
         description=_(u"By default object's content-type will be used. Either "
-                      "html or file mime-type for File/Image based content "
-                      "types."),
+                      'html or file mime-type for File/Image based content '
+                      'types.'),
         required=False,
         default=False,
         missing_value=False
     )
-    
+
     agls_format = schema.TextLine(
-        title=_(u"AGLS Format"),
-        description=_(u"Enter here custom format to use in AGLS tag."),
+        title=_(u'AGLS Format'),
+        description=_(u'Enter here custom format to use in AGLS tag.'),
         required=False,
         default=u'',
         missing_value=u''
     )
-    
+
     # display fields only on edit forms
     form.omitted('AGLSType', 'subjects', 'language', *AGLS_FIELDS)
     form.no_omit(IEditForm, 'AGLSType', 'subjects', 'language', *AGLS_FIELDS)
@@ -221,6 +213,7 @@ class IAGLS(form.Schema):
 
 # Mark this interface as form field provider
 alsoProvides(IAGLS, IFormFieldProvider)
+
 
 class AGLS(Categorization):
 

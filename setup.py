@@ -9,7 +9,7 @@ from setuptools import setup, find_packages
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-version = '1.0.1'
+version = '1.0.4'
 
 long_description = (
     read('README.rst')
@@ -32,7 +32,7 @@ long_description = (
     'Download\n'
     '********\n')
 
-tests_require = ['zope.testing']
+tests_require = ['zope.testing', 'Products.PloneTestCase']
 
 setup(name='pretaweb.agls',
       version=version,
@@ -41,10 +41,10 @@ setup(name='pretaweb.agls',
       # Get more strings from
       # http://pypi.python.org/pypi?:action=list_classifiers
       classifiers=[
-        'Framework :: Plone',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: GNU General Public License (GPL)',
-        ],
+          'Framework :: Plone',
+          'Intended Audience :: Developers',
+          'License :: OSI Approved :: GNU General Public License (GPL)',
+      ],
       keywords='plone agls metadata',
       author='Dylan Jay',
       author_email='software@pretaweb.com',

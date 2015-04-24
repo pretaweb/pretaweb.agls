@@ -1,5 +1,8 @@
-import logging
+# -*- coding: utf-8 -*-
 from Products.CMFCore.utils import getToolByName
+
+import logging
+
 # The profile id of your package:
 PROFILE_ID = 'profile-pretaweb.agls:default'
 
@@ -36,10 +39,10 @@ def add_catalog_indexes(context, logger=None):
     for name, meta_type in wanted:
         if name not in indexes:
             catalog.addIndex(name, meta_type)
-            logger.info("Added %s for field %s.", meta_type, name)
+            logger.info('Added %s for field %s.', meta_type, name)
         indexables.append(name)
     if len(indexables) > 0:
-        logger.info("Indexing new indexes %s.", ', '.join(indexables))
+        logger.info('Indexing new indexes %s.', ', '.join(indexables))
         catalog.manage_reindexIndex(ids=indexables)
 
 
@@ -73,8 +76,9 @@ def uninstall(context):
     for name, meta_type in wanted:
         if name in indexes:
             catalog.delIndex(name)
-            logger.info("Removed %s for field %s.", meta_type, name)
+            logger.info('Removed %s for field %s.', meta_type, name)
             # old collections
             atct.removeIndex(name)
             atct.removeMetadata(name)
-            logger.info("Removed %s for old collection field %s.", meta_type, name)
+            logger.info(
+                'Removed %s for old collection field %s.', meta_type, name)

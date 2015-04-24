@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 from DateTime import DateTime
+
 
 # we patch this method to ensure creation date takes into account
 # client's timezone on setting new date input from user

@@ -1,22 +1,19 @@
+# -*- coding: utf-8 -*-
 from Acquisition import aq_inner
-
-from zope.component import getUtility
-from Products.Five.browser import BrowserView
-
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.CMFPlone.utils import safe_unicode
+# The interface used should be the same as in ../content/agls
+from Products.Archetypes.interfaces import IBaseContent
 from Products.Archetypes.utils import shasattr
-
+from Products.CMFPlone.utils import safe_unicode
+from Products.Five.browser import BrowserView
+from plone.indexer import indexer
 from plone.registry.interfaces import IRegistry
-from plone.app.layout.viewlets.common import DublinCoreViewlet
-
-from pretaweb.agls.config import AGLS_SCHEME
+from zope.component import getUtility
 
 
 class AGLSView(BrowserView):
 
     def Title(self):
-        "@return agls override of Title or None"
+        """@return agls override of Title or None"""
         context = aq_inner(self.context)
 
         # AGLS Title
@@ -27,7 +24,7 @@ class AGLSView(BrowserView):
             return None
 
     def Description(self):
-        "@return agls override of Description or None"
+        """@return agls override of Description or None"""
         context = aq_inner(self.context)
 
         # AGLS Description
@@ -38,7 +35,7 @@ class AGLSView(BrowserView):
             return None
 
     def Created(self):
-        "@return ISO8601 of creation_date"
+        """@return ISO8601 of creation_date"""
         context = aq_inner(self.context)
 
         # AGLS Date
@@ -53,7 +50,7 @@ class AGLSView(BrowserView):
         return value
 
     def Creator(self):
-        "@return agls override of author or None"
+        """@return agls override of author or None"""
         context = aq_inner(self.context)
 
         # get global AGLS settings
@@ -72,7 +69,7 @@ class AGLSView(BrowserView):
         return value
 
     def Subject(self):
-        "@return agls override of Subject or None"
+        """@return agls override of Subject or None"""
         context = aq_inner(self.context)
 
         # AGLS Subject
@@ -84,7 +81,7 @@ class AGLSView(BrowserView):
         return value
 
     def Type(self):
-        "@return agls tyoe"
+        """@return agls tyoe"""
         context = aq_inner(self.context)
 
         # AGLS Type
@@ -94,7 +91,7 @@ class AGLSView(BrowserView):
         return safe_unicode(value)
 
     def Identifier(self):
-        "@return agls identifier or UUID"
+        """@return agls identifier or UUID"""
         context = aq_inner(self.context)
 
         # AGLS Identifier
@@ -108,7 +105,7 @@ class AGLSView(BrowserView):
         return value
 
     def Publisher(self):
-        "@return agls publisher or None"
+        """@return agls publisher or None"""
         context = aq_inner(self.context)
         # get global AGLS settings
         registry = getUtility(IRegistry)
@@ -126,10 +123,8 @@ class AGLSView(BrowserView):
         return safe_unicode(value)
 
     def Format(self):
-        "@return agls format override"
+        """@return agls format override"""
         context = aq_inner(self.context)
-        # get global AGLS settings
-        registry = getUtility(IRegistry)
 
         # AGLS Format
         if shasattr(context, 'agls_format_override') and \
@@ -139,21 +134,16 @@ class AGLSView(BrowserView):
             value = None
         return safe_unicode(value)
 
-from plone.indexer import indexer
-
-# The interface used should be the same as in ../content/agls
-from Products.Archetypes.interfaces import IBaseContent
-#from Products.ATContentTypes.interface import IATContentType
-
 
 @indexer(IBaseContent)
 def agls_subject(object, **kw):
     return object.unrestrictedTraverse('agls').Subject()
 
+
 @indexer(IBaseContent)
 def agls_type(context, **kw):
     schema = context.Schema()
-    atype = schema.getitem('AGLSType', None)
+    atype = schema.get('AGLSType', None)
     if atype is not None:
         return atype.get(context)
     else:
