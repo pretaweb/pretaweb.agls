@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Test setup for integration and functional tests.
 
 When we import PloneTestCase and then call setupPloneSite(), all of

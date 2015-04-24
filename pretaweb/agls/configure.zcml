@@ -6,7 +6,7 @@
     xmlns:zcml="http://namespaces.zope.org/zcml"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     i18n_domain="pretaweb.agls">
-    
+
   <five:registerPackage package="." initialize=".initialize" />
   <include package="collective.z3cform.keywordwidget" />
 
