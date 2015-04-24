@@ -75,7 +75,7 @@ class IAGLS(form.Schema):
     # AGLS Title
     agls_title_override = schema.Bool(
         title=_(u'Override AGLS Title'),
-        description=_(u'By default object's title field is used.'),
+        description=_(u"By default object's title field is used."),
         required=False,
         default=False,
         missing_value=False
@@ -92,7 +92,7 @@ class IAGLS(form.Schema):
     # AGLS Description
     agls_desc_override = schema.Bool(
         title=_(u'Override AGLS Description'),
-        description=_(u'By default object's description field is used.'),
+        description=_(u"By default object's description field is used."),
         required=False,
         default=False,
         missing_value=False
@@ -117,7 +117,7 @@ class IAGLS(form.Schema):
     # AGLS Author
     agls_author_override = schema.Bool(
         title=_(u'Override AGLS Author'),
-        description=_(u'By default object's creator field is used or global '
+        description=_(u"By default object's creator field is used or global "
                       'control panel settings if configured.'),
         required=False,
         default=False,
@@ -136,7 +136,7 @@ class IAGLS(form.Schema):
     agls_type_override = schema.Bool(
         title=_(u'Override AGLS Type'),
         description=_(
-            u'By default object's AGLS Type, from Categorization tab,'
+            u"By default object's AGLS Type, from Categorization tab,"
             u' field is used in AGLS tag.'),
         required=False,
         default=False,
@@ -154,7 +154,7 @@ class IAGLS(form.Schema):
     # AGLS Identifier
     agls_id_override = schema.Bool(
         title=_(u'Override AGLS Identifier'),
-        description=_(u'By default object's UID attribute is used for AGLS '
+        description=_(u"By default object's UID attribute is used for AGLS "
                       'tag.'),
         required=False,
         default=False,
