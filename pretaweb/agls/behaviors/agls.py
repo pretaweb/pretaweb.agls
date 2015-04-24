@@ -7,7 +7,8 @@ from plone.autoform.interfaces import IFormFieldProvider
 from plone.directives import form
 from pretaweb.agls.form.widget import Z3CFormKeywordFieldWidget
 from pretaweb.agls import messageFactory as _
-from z3c.form.interfaces import IEditForm, IAddForm
+from z3c.form.interfaces import IAddForm
+from z3c.form.interfaces import IEditForm
 from zope import schema
 from zope.interface import alsoProvides
 

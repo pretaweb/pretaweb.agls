@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_inner
+# The interface used should be the same as in ../content/agls
+from Products.Archetypes.interfaces import IBaseContent
 from Products.Archetypes.utils import shasattr
 from Products.CMFPlone.utils import safe_unicode
 from Products.Five.browser import BrowserView
+from plone.indexer import indexer
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
 
@@ -131,11 +134,6 @@ class AGLSView(BrowserView):
             value = None
         return safe_unicode(value)
 
-from plone.indexer import indexer
-
-# The interface used should be the same as in ../content/agls
-from Products.Archetypes.interfaces import IBaseContent
-# from Products.ATContentTypes.interface import IATContentType
 
 
 @indexer(IBaseContent)

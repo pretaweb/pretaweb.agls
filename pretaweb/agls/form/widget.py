@@ -4,7 +4,8 @@ from Products.Archetypes.Widget import KeywordWidget
 from Products.CMFCore.utils import getToolByName
 from collective.z3cform.keywordwidget import widget as z3cwidget
 from collective.z3cform.keywordwidget.interfaces import IKeywordCollection
-from z3c.form.interfaces import IFormLayer, IFieldWidget
+from z3c.form.interfaces import IFieldWidget
+from z3c.form.interfaces import IFormLayer
 from z3c.form.widget import FieldWidget
 from zope.component import adapter
 from zope.i18n import translate
