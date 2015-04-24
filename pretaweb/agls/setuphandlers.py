@@ -1,5 +1,7 @@
-import logging
 from Products.CMFCore.utils import getToolByName
+
+import logging
+
 # The profile id of your package:
 PROFILE_ID = 'profile-pretaweb.agls:default'
 
@@ -77,4 +79,5 @@ def uninstall(context):
             # old collections
             atct.removeIndex(name)
             atct.removeMetadata(name)
-            logger.info("Removed %s for old collection field %s.", meta_type, name)
+            logger.info(
+                "Removed %s for old collection field %s.", meta_type, name)

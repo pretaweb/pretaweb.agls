@@ -1,5 +1,6 @@
 from DateTime import DateTime
 
+
 # we patch this method to ensure creation date takes into account
 # client's timezone on setting new date input from user
 def setCreationDate(self, creation_date=None):

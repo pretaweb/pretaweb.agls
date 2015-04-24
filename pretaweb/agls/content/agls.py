@@ -1,26 +1,27 @@
+from Products.Archetypes import public as atapi
+from Products.Archetypes.atapi import DisplayList
+from Products.Archetypes.interfaces import IBaseContent
+from archetypes.schemaextender.field import ExtensionField
+from archetypes.schemaextender.interfaces import IBrowserLayerAwareExtender
+from archetypes.schemaextender.interfaces import ISchemaModifier
+from pretaweb.agls import messageFactory as _
+from pretaweb.agls.browser.interfaces import IPackageLayer
 from zope.component import adapts
 from zope.interface import implements
 
-from Products.Archetypes.interfaces import IBaseContent
-from Products.Archetypes import public as atapi
-
-from archetypes.schemaextender.field import ExtensionField
-from archetypes.schemaextender.interfaces import IBrowserLayerAwareExtender, \
-    ISchemaExtender, ISchemaModifier
-from Products.Archetypes.atapi import DisplayList
-
-from pretaweb.agls.browser.interfaces import IPackageLayer
-from pretaweb.agls import messageFactory as _
 
 # extender AT fields
 class ExtensionBooleanField(ExtensionField, atapi.BooleanField):
     """Retrofitted boolean field"""
 
+
 class ExtensionStringField(ExtensionField, atapi.StringField):
     """Retrofitted string field"""
 
+
 class ExtensionTextField(ExtensionField, atapi.TextField):
     """Retrofitted text field"""
+
 
 class ExtensionLinesField(ExtensionField, atapi.LinesField):
     """Retrofitted lines field"""
@@ -60,10 +61,9 @@ Work instruction
 Survey
 """
 
-#TODO needs to go in behaviour too
-AGLS_TYPES_VOCAB = DisplayList([(v,v) for v in AGLS_TYPES.split('\n') if v.strip()]+[('','')])
-
-
+# TODO needs to go in behaviour too
+AGLS_TYPES_VOCAB = DisplayList(
+    [(v, v) for v in AGLS_TYPES.split('\n') if v.strip()] + [('', '')])
 
 
 class AGLSModifier(object):
@@ -71,12 +71,12 @@ class AGLSModifier(object):
 
     adapts(IBaseContent)
     implements(ISchemaModifier, IBrowserLayerAwareExtender)
-    
+
     layer = IPackageLayer
-    
+
     def __init__(self, context):
         self.context = context
-        
+
     def fiddle(self, schema):
         if schema.get('creation_date', None) is None:
             return
@@ -86,29 +86,30 @@ class AGLSModifier(object):
 
         # move to AGLS schemata
         schema['creation_date'].schemata = 'AGLS Overrides'
-        
+
         # update description
-        schema['creation_date'].widget.description = _(u"Date this "
-            "object was created. Used for AGLS Date meta tag.")
-            
+        schema['creation_date'].widget.description = _(
+            u"Date this object was created. Used for AGLS Date meta tag.")
+
         # unhide it
-        schema['creation_date'].widget.visible = {'edit': 'visible',
+        schema['creation_date'].widget.visible = {
+            'edit': 'visible',
             'view': 'invisible'}
-        
+
         # set starting year
         schema['creation_date'].widget.starting_year = 1990
-        
+
         # move after AGLS description field
         schema.moveField('creation_date', after='agls_desc')
 
     """Adds AGLS fields to all archetypes objects that are used to override
     AGLA meta tags on a page on per object bases.
     """
-    
-    
+
     fields = [
         # AGLS Title
-        ExtensionBooleanField("agls_title_override",
+        ExtensionBooleanField(
+            "agls_title_override",
             schemata="AGLS Overrides",
             widget=atapi.BooleanWidget(
                 label=_(u"Override AGLS Title"),
@@ -117,7 +118,8 @@ class AGLSModifier(object):
             required=False,
             default=False
         ),
-        ExtensionStringField("agls_title",
+        ExtensionStringField(
+            "agls_title",
             schemata="AGLS Overrides",
             widget=atapi.StringWidget(
                 label=_(u"AGLS Title"),
@@ -126,18 +128,21 @@ class AGLSModifier(object):
             required=False,
             default=''
         ),
-        
+
         # AGLS Description
-        ExtensionBooleanField("agls_desc_override",
+        ExtensionBooleanField(
+            "agls_desc_override",
             schemata="AGLS Overrides",
             widget=atapi.BooleanWidget(
                 label=_(u"Override AGLS Description"),
-                description=_(u"By default object's description field is used.")
+                description=_(
+                    u"By default object's description field is used.")
             ),
             required=False,
             default=False
         ),
-        ExtensionTextField("agls_desc",
+        ExtensionTextField(
+            "agls_desc",
             schemata="AGLS Overrides",
             default_content_type='text/plain',
             allowable_content_types=('text/plain',),
@@ -149,9 +154,10 @@ class AGLSModifier(object):
             required=False,
             default=''
         ),
-        
+
         # AGLS Author
-        ExtensionBooleanField("agls_author_override",
+        ExtensionBooleanField(
+            "agls_author_override",
             schemata="AGLS Overrides",
             widget=atapi.BooleanWidget(
                 label=_(u"Override AGLS Author"),
@@ -161,7 +167,8 @@ class AGLSModifier(object):
             required=False,
             default=False
         ),
-        ExtensionStringField("agls_author",
+        ExtensionStringField(
+            "agls_author",
             schemata="AGLS Overrides",
             widget=atapi.StringWidget(
                 label=_(u"AGLS Author"),
@@ -170,8 +177,9 @@ class AGLSModifier(object):
             required=False,
             default=''
         ),
-        
-        ExtensionStringField("AGLSType",
+
+        ExtensionStringField(
+            "AGLSType",
             schemata="categorization",
             widget=atapi.SelectionWidget(
                 label=_(u"AGLS Type"),
@@ -183,9 +191,10 @@ class AGLSModifier(object):
 
 
         ),
-        
+
         # AGLS Identifier
-        ExtensionBooleanField("agls_id_override",
+        ExtensionBooleanField(
+            "agls_id_override",
             schemata="AGLS Overrides",
             widget=atapi.BooleanWidget(
                 label=_(u"Override AGLS Identifier"),
@@ -195,7 +204,8 @@ class AGLSModifier(object):
             required=False,
             default=False
         ),
-        ExtensionStringField("agls_id",
+        ExtensionStringField(
+            "agls_id",
             schemata="AGLS Overrides",
             widget=atapi.StringWidget(
                 label=_(u"AGLS Identifier"),
@@ -205,9 +215,10 @@ class AGLSModifier(object):
             required=False,
             default=''
         ),
-        
+
         # AGLS Publisher
-        ExtensionBooleanField("agls_publisher_override",
+        ExtensionBooleanField(
+            "agls_publisher_override",
             schemata="AGLS Overrides",
             widget=atapi.BooleanWidget(
                 label=_(u"Override AGLS Publisher"),
@@ -217,7 +228,8 @@ class AGLSModifier(object):
             required=False,
             default=False
         ),
-        ExtensionStringField("agls_publisher",
+        ExtensionStringField(
+            "agls_publisher",
             schemata="AGLS Overrides",
             widget=atapi.StringWidget(
                 label=_(u"AGLS Publisher"),
@@ -227,20 +239,23 @@ class AGLSModifier(object):
             required=False,
             default=''
         ),
-        
+
         # AGLS Format
-        ExtensionBooleanField("agls_format_override",
+        ExtensionBooleanField(
+            "agls_format_override",
             schemata="AGLS Overrides",
             widget=atapi.BooleanWidget(
                 label=_(u"Override AGLS Format"),
-                description=_(u"By default object's content-type will be used. "
-                              "Either html or file mime-type for File/Image "
-                              "based content types.")
+                description=_(
+                    u"By default object's content-type will be used. "
+                    u"Either html or file mime-type for File/Image "
+                    u"based content types.")
             ),
             required=False,
             default=False
         ),
-        ExtensionStringField("agls_format",
+        ExtensionStringField(
+            "agls_format",
             schemata="AGLS Overrides",
             widget=atapi.StringWidget(
                 label=_(u"AGLS Format"),
@@ -249,10 +264,9 @@ class AGLSModifier(object):
             ),
             required=False
         ),
-        
+
     ]
 
-    
     def getFields(self):
         """Return list of new fields we contribute to content"""
         return self.fields

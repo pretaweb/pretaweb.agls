@@ -1,9 +1,7 @@
 from Acquisition import aq_inner
-
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.CMFPlone.utils import safe_unicode
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.layout.viewlets.common import DublinCoreViewlet
-
 from pretaweb.agls.config import AGLS_SCHEME
 
 
@@ -36,7 +34,9 @@ class AGLSViewlet(DublinCoreViewlet):
         })
 
         # AGLS Description (mandatory)
-        value = agls.Description() or dc.get('DC.description', '') or context.Description()
+        value = agls.Description() or \
+            dc.get('DC.description', '') or \
+            context.Description()
         agls_tags.append({
             'name': u'DCTERMS.description',
             'content': safe_unicode(value),
@@ -58,12 +58,15 @@ class AGLSViewlet(DublinCoreViewlet):
         # AGLS Creator (mandatory)
         agls_tags.append({
             'name': u'DCTERMS.creator',
-            'content': safe_unicode(agls.Creator() or dc.get('DC.creator', '')),
+            'content': safe_unicode(
+                agls.Creator() or
+                dc.get('DC.creator', '')),
             'scheme': AGLS_SCHEME['DCTERMS.creator']
         })
 
         # AGLS Subject
-        value = agls.Subject() or '; '.join(dc.get('DC.subject', '').split(', '))
+        value = agls.Subject() or \
+            '; '.join(dc.get('DC.subject', '').split(', '))
         agls_tags.append({
             'name': u'DCTERMS.subject',
             'content': safe_unicode(value),
@@ -104,7 +107,9 @@ class AGLSViewlet(DublinCoreViewlet):
         # AGLS Publisher
         agls_tags.append({
             'name': u'DCTERMS.publisher',
-            'content': safe_unicode(agls.Publisher() or dc.get('DC.creator', '')),
+            'content': safe_unicode(
+                agls.Publisher() or
+                dc.get('DC.creator', '')),
             'scheme': AGLS_SCHEME['DCTERMS.publisher']
         })
 
@@ -120,7 +125,9 @@ class AGLSViewlet(DublinCoreViewlet):
 
         agls_tags.append({
             'name': u'DCTERMS.format',
-            'content': safe_unicode(agls.Format() or dc.get('DC.format', '') or default_format),
+            'content': safe_unicode(
+                agls.Format() or
+                dc.get('DC.format', '') or default_format),
             'scheme': AGLS_SCHEME['DCTERMS.format']
         })
 

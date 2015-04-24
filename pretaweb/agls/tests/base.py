@@ -8,11 +8,9 @@ slows down test runner startup.
 
 from Products.Five import zcml
 from Products.Five import fiveconfigure
-
-from Testing import ZopeTestCase as ztc
-
 from Products.PloneTestCase import PloneTestCase as ptc
 from Products.PloneTestCase.layer import onsetup
+from Testing import ZopeTestCase as ztc
 
 # When ZopeTestCase configures Zope, it will *not* auto-load products
 # in Products/. Instead, we have to use a statement such as:

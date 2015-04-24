@@ -1,16 +1,9 @@
 from Acquisition import aq_inner
-
-from zope.component import getUtility
-from Products.Five.browser import BrowserView
-
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.CMFPlone.utils import safe_unicode
 from Products.Archetypes.utils import shasattr
-
+from Products.CMFPlone.utils import safe_unicode
+from Products.Five.browser import BrowserView
 from plone.registry.interfaces import IRegistry
-from plone.app.layout.viewlets.common import DublinCoreViewlet
-
-from pretaweb.agls.config import AGLS_SCHEME
+from zope.component import getUtility
 
 
 class AGLSView(BrowserView):
@@ -128,8 +121,6 @@ class AGLSView(BrowserView):
     def Format(self):
         "@return agls format override"
         context = aq_inner(self.context)
-        # get global AGLS settings
-        registry = getUtility(IRegistry)
 
         # AGLS Format
         if shasattr(context, 'agls_format_override') and \
@@ -143,12 +134,13 @@ from plone.indexer import indexer
 
 # The interface used should be the same as in ../content/agls
 from Products.Archetypes.interfaces import IBaseContent
-#from Products.ATContentTypes.interface import IATContentType
+# from Products.ATContentTypes.interface import IATContentType
 
 
 @indexer(IBaseContent)
 def agls_subject(object, **kw):
     return object.unrestrictedTraverse('agls').Subject()
+
 
 @indexer(IBaseContent)
 def agls_type(context, **kw):

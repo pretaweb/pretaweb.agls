@@ -41,10 +41,10 @@ setup(name='pretaweb.agls',
       # Get more strings from
       # http://pypi.python.org/pypi?:action=list_classifiers
       classifiers=[
-        'Framework :: Plone',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: GNU General Public License (GPL)',
-        ],
+          'Framework :: Plone',
+          'Intended Audience :: Developers',
+          'License :: OSI Approved :: GNU General Public License (GPL)',
+      ],
       keywords='plone agls metadata',
       author='Dylan Jay',
       author_email='software@pretaweb.com',

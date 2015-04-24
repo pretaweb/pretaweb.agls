@@ -1,5 +1,7 @@
 from plone.theme.interfaces import IDefaultPloneLayer
+
 import zope.interface
+
 
 class IPackageLayer(IDefaultPloneLayer):
     """A layer specific to pretaweb.agls package"""
