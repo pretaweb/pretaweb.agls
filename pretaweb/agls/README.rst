@@ -1,5 +1,5 @@
-Introduction
-============
+Documentation
+=============
 
 This is a full-blown functional test. The emphasis here is on testing what
 the user may input and see, and the system is largely tested as a black box.
@@ -46,6 +46,3 @@ submit click.  We then ensure that we get the friendly logged-in message:
 Finally, let's return to the front page of our site before continuing
 
     >>> browser.open(portal_url)
-
--*- extra stuff goes here -*-
-

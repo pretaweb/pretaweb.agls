@@ -11,26 +11,12 @@ def read(*rnames):
 
 version = '1.0.4'
 
-long_description = (
-    read('README.rst')
-    + '\n' +
-    'Change history\n'
-    '**************\n'
-    + '\n' +
-    read('CHANGES.txt')
-    + '\n' +
-    'Detailed Documentation\n'
-    '**********************\n'
-    + '\n' +
-    read('pretaweb', 'agls', 'README.txt')
-    + '\n' +
-    'Contributors\n'
-    '************\n'
-    + '\n' +
-    read('CONTRIBUTORS.txt')
-    + '\n' +
-    'Download\n'
-    '********\n')
+long_description = '\n'.join([
+    read('README.rst'),
+    read('CHANGES.rst'),
+    read('pretaweb', 'agls', 'README.rst'),
+    read('CONTRIBUTORS.rst'),
+])
 
 tests_require = ['zope.testing', 'Products.PloneTestCase']
 

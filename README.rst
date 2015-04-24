@@ -1,14 +1,19 @@
-Introduction
-============
-
 .. image:: https://travis-ci.org/pretaweb/pretaweb.agls.png?branch=master
     :target: http://travis-ci.org/pretaweb/pretaweb.agls
 
+=============
+Pretaweb AGLS
+=============
+
+.. contents::
+
+Introduction
+============
+
 This package introduces AGLS Metadata into Plone pages.
 
-
 Compatibility
--------------
+=============
 
 Tested on plone 4.
 
@@ -18,9 +23,8 @@ Works for the next Plone content type frameworks:
 
 * Dexterity
 
-
 Useful Links
-------------
+============
 
 * AGLS Standard:
     http://www.agls.gov.au/
