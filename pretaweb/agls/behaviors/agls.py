@@ -17,7 +17,6 @@ AGLS_TYPES_VOCAB = SimpleVocabulary(
 AGLS_FIELDS = (
     'agls_title_override', 'agls_title',
     'agls_desc_override', 'agls_desc',
-    'creation_date',
     'agls_author_override', 'agls_author',
     'agls_id_override', 'agls_id',
     'agls_publisher_override', 'agls_publisher',
@@ -192,7 +191,6 @@ class AGLS(object):
     agls_title = BasicProperty(IAGLS['agls_title'])
     agls_desc_override = BasicProperty(IAGLS['agls_desc_override'])
     agls_desc = BasicProperty(IAGLS['agls_desc'])
-    creation_date = BasicProperty(IAGLS['creation_date'])
     agls_author_override = BasicProperty(IAGLS['agls_author_override'])
     agls_author = BasicProperty(IAGLS['agls_author'])
     agls_id_override = BasicProperty(IAGLS['agls_id_override'])
