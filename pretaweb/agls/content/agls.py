@@ -29,42 +29,42 @@ class ExtensionLinesField(ExtensionField, atapi.LinesField):
 
 # Static for now. Will use ATVocabularyManager later
 
-AGLS_TYPES = """
-Audio
-Booklet
-Brochure
-Case study
-Checklist
-Directive
-Fact sheet
-Form
-Guidance/guideline
-How to
-Image/photo
-Legislation
-Manual
-Minutes
-News article
-Plan
-Policy
-Presentation
-Procedure
-Publication
-Report
-Research
-Standard
-Strategy
-Template
-Terms of reference
-Video
-Websites
-Work instruction
-Survey
-"""
+AGLS_TYPES = [
+    "Audio",
+    "Booklet",
+    "Brochure",
+    "Case study",
+    "Checklist",
+    "Directive",
+    "Fact sheet",
+    "Form",
+    "Guidance/guideline",
+    "How to",
+    "Image/photo",
+    "Legislation",
+    "Manual",
+    "Minutes",
+    "News article",
+    "Plan",
+    "Policy",
+    "Presentation",
+    "Procedure",
+    "Publication",
+    "Report",
+    "Research",
+    "Standard",
+    "Strategy",
+    "Template",
+    "Terms of reference",
+    "Video",
+    "Websites",
+    "Work instruction",
+    "Survey",
+]
 
-# TODO needs to go in behaviour too
 AGLS_TYPES_VOCAB = DisplayList(
-    [(v, v) for v in AGLS_TYPES.split('\n') if v.strip()] + [('', '')])
+    [(v, v) for v in AGLS_TYPES] + [('', '')]
+)
 
 
 class AGLSModifier(object):

@@ -1,27 +1,24 @@
-# -*- coding: utf-8 -*-
-from collective.z3cform.keywordwidget.field import Keywords
-from plone.app.dexterity.behaviors.metadata import Categorization
-from plone.app.dexterity.behaviors.metadata import DCFieldProperty
-from plone.app.dexterity.behaviors.metadata import ICategorization
-from plone.autoform.interfaces import IFormFieldProvider
-from plone.directives import form
-from pretaweb.agls.form.widget import Z3CFormKeywordFieldWidget
-from pretaweb.agls import messageFactory as _
-from z3c.form.interfaces import IAddForm
-from z3c.form.interfaces import IEditForm
 from zope import schema
+from zope.component import adapts
 from zope.interface import alsoProvides
+from zope.interface import implements
+from plone.dexterity.interfaces import IDexterityContent
+from plone.directives import form
+from pretaweb.agls import messageFactory as _
+from z3c.form.interfaces import IEditForm
+from z3c.form.interfaces import IAddForm
+from pretaweb.agls.content.agls import AGLS_TYPES
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
-# Behavior interface to display AGLS Metadata fields on Dexterity
-# content edit forms.
-
+AGLS_TYPES_VOCAB = SimpleVocabulary(
+    [SimpleTerm(value=x, title=_(x)) for x in AGLS_TYPES]
+)
 
 AGLS_FIELDS = (
     'agls_title_override', 'agls_title',
     'agls_desc_override', 'agls_desc',
     'creation_date',
     'agls_author_override', 'agls_author',
-    'agls_type_override', 'agls_type',
     'agls_id_override', 'agls_id',
     'agls_publisher_override', 'agls_publisher',
     'agls_format_override', 'agls_format'
@@ -29,46 +26,26 @@ AGLS_FIELDS = (
 
 
 class IAGLS(form.Schema):
-    """Here we define new AGLS fieldset as well as extend and modify
-    existing Categorization fielset:
 
-      * add AGLSType field
-      * set KeywordWidget to subjects field
-    """
-
-    # Categorization fieldset
     form.fieldset(
         'categorization',
-        label=_(u'Categorization'),
-        fields=['subjects', 'language', 'AGLSType'],
+        label=u'Categorization',
+        fields=['AGLSType'],
     )
-
-    subjects = Keywords(
-        title=_(u'label_categories', default=u'Categories'),
-        description=_(u'help_categories', default=u'Also known as keywords, '
-                      'tags or labels, these help you categorize your '
-                      'content.'),
-        required=False,
-        value_type=schema.TextLine(),
-        missing_value=()
-    )
-    form.widget(subjects=Z3CFormKeywordFieldWidget)
-
-    language = ICategorization['language']
 
     # Main AGLS Type
-    AGLSType = schema.TextLine(
+    AGLSType = schema.Choice(
         title=_(u'AGLS Type'),
         description=_(u'Enter here text line to use in AGLS Type tag.'),
         required=False,
-        default=u'',
-        missing_value=u''
+        default=None,
+        missing_value=u'',
+        vocabulary=AGLS_TYPES_VOCAB,
     )
 
-    # AGLS fieldset
     form.fieldset(
         'agls_metadata',
-        label=_(u'Agls metadata'),
+        label=_(u'AGLS Overrides'),
         fields=list(AGLS_FIELDS),
     )
 
@@ -132,25 +109,6 @@ class IAGLS(form.Schema):
         missing_value=u''
     )
 
-    # AGLS Type
-    agls_type_override = schema.Bool(
-        title=_(u'Override AGLS Type'),
-        description=_(
-            u"By default object's AGLS Type, from Categorization tab,"
-            u' field is used in AGLS tag.'),
-        required=False,
-        default=False,
-        missing_value=False
-    )
-
-    agls_type = schema.TextLine(
-        title=_(u'AGLS Type'),
-        description=_(u'Enter here custom Type to use in AGLS Type Tag.'),
-        required=False,
-        default=u'',
-        missing_value=u''
-    )
-
     # AGLS Identifier
     agls_id_override = schema.Bool(
         title=_(u'Override AGLS Identifier'),
@@ -207,29 +165,48 @@ class IAGLS(form.Schema):
     )
 
     # display fields only on edit forms
-    form.omitted('AGLSType', 'subjects', 'language', *AGLS_FIELDS)
-    form.no_omit(IEditForm, 'AGLSType', 'subjects', 'language', *AGLS_FIELDS)
-    form.no_omit(IAddForm, 'AGLSType', 'subjects', 'language', *AGLS_FIELDS)
+    form.omitted('AGLSType', *AGLS_FIELDS)
+    form.no_omit(IEditForm, 'AGLSType', *AGLS_FIELDS)
+    form.no_omit(IAddForm, 'AGLSType', *AGLS_FIELDS)
 
-# Mark this interface as form field provider
-alsoProvides(IAGLS, IFormFieldProvider)
+alsoProvides(IAGLS, form.IFormFieldProvider)
 
 
-class AGLS(Categorization):
+class BasicProperty(object):
 
-    agls_title_override = DCFieldProperty(IAGLS['agls_title_override'])
-    agls_title = DCFieldProperty(IAGLS['agls_title'])
-    agls_desc_override = DCFieldProperty(IAGLS['agls_desc_override'])
-    agls_desc = DCFieldProperty(IAGLS['agls_desc'])
-    creation_date = DCFieldProperty(IAGLS['creation_date'])
-    agls_author_override = DCFieldProperty(IAGLS['agls_author_override'])
-    agls_author = DCFieldProperty(IAGLS['agls_author'])
-    agls_type_override = DCFieldProperty(IAGLS['agls_type_override'])
-    agls_type = DCFieldProperty(IAGLS['agls_type'])
-    agls_id_override = DCFieldProperty(IAGLS['agls_id_override'])
-    agls_id = DCFieldProperty(IAGLS['agls_id'])
-    agls_publisher_override = DCFieldProperty(IAGLS['agls_publisher_override'])
-    agls_publisher = DCFieldProperty(IAGLS['agls_publisher'])
-    agls_format_override = DCFieldProperty(IAGLS['agls_format_override'])
-    agls_format = DCFieldProperty(IAGLS['agls_format'])
-    AGLSType = DCFieldProperty(IAGLS['AGLSType'])
+    def __init__(self, field):
+        self._field = field
+
+    def __get__(self, inst, klass):
+        if inst is None:
+            return self
+        return getattr(inst.context, self._field.__name__, self._field.default)
+
+    def __set__(self, inst, value):
+        setattr(inst.context, self._field.__name__, value)
+
+    def __getattr__(self, name):
+        return getattr(self._field, name)
+
+
+class AGLS(object):
+    implements(IAGLS)
+    adapts(IDexterityContent)
+
+    def __init__(self, context):
+        self.context = context
+
+    agls_title_override = BasicProperty(IAGLS['agls_title_override'])
+    agls_title = BasicProperty(IAGLS['agls_title'])
+    agls_desc_override = BasicProperty(IAGLS['agls_desc_override'])
+    agls_desc = BasicProperty(IAGLS['agls_desc'])
+    creation_date = BasicProperty(IAGLS['creation_date'])
+    agls_author_override = BasicProperty(IAGLS['agls_author_override'])
+    agls_author = BasicProperty(IAGLS['agls_author'])
+    agls_id_override = BasicProperty(IAGLS['agls_id_override'])
+    agls_id = BasicProperty(IAGLS['agls_id'])
+    agls_publisher_override = BasicProperty(IAGLS['agls_publisher_override'])
+    agls_publisher = BasicProperty(IAGLS['agls_publisher'])
+    agls_format_override = BasicProperty(IAGLS['agls_format_override'])
+    agls_format = BasicProperty(IAGLS['agls_format'])
+    AGLSType = BasicProperty(IAGLS['AGLSType'])
