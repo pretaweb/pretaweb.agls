@@ -83,14 +83,6 @@ class IAGLS(form.Schema):
         missing_value=u''
     )
 
-    # AGLS Date
-    creation_date = schema.Datetime(
-        title=_(u'Creation Date'),
-        description=_(u'Date this object was created. Used for AGLS Date meta '
-                      'tag.'),
-        required=False
-    )
-
     # AGLS Author
     agls_author_override = schema.Bool(
         title=_(u'Override AGLS Author'),
