@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.0.6 (unlreased)
+-----------------
+- Fixes to dexterity behaviour 
+  [dmarks]
+
+
 1.0.5 (25-April-2015)
 ---------------------
 
