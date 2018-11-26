@@ -44,7 +44,8 @@ setup(name='pretaweb.agls',
       install_requires=['setuptools',
                         'plone.app.z3cform',
                         'collective.z3cform.keywordwidget',
-                        'z3c.jbot'
+                        'z3c.jbot',
+                        'plone.directives.form'
                         # -*- Extra requirements: -*-
                         ],
       tests_require=tests_require,

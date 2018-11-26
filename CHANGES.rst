@@ -6,6 +6,9 @@ Changelog
 - Fixes to dexterity behaviour 
   [dmarks]
 
+- Add dependency to plone.directives.form
+  [instification]
+
 
 1.0.5 (25-April-2015)
 ---------------------
